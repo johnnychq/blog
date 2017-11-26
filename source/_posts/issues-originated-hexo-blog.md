@@ -1,5 +1,5 @@
 ---
-title: issues-originated-hexo-blog
+title: How to eliminate the gap between github issues blog and hexo blog
 date: 2017-11-26T15:55:13Z
 categories:
 - tools
@@ -37,9 +37,9 @@ categories:
 为了实现上述设计，只需要实现两个约束即可
 
 1. `github  issues  tag`规范 (tag前缀规范，定义了两种特殊的前缀）
-    * `blog-{{unique name}}`, 即blog前缀，即`设计结构2`中的unique name
-    * `cat-{{category name}}`,即cat前缀，即`设计结构1`中关于分类的那一小点，因为要区分标签和分类，所以要加前缀
-    * `{{tag name}}`，无前缀时默认为博文的标签
+    * `blog-${unique name}`, 即blog前缀，即`设计结构2`中的unique name
+    * `cat-${category name}`,即cat前缀，即`设计结构1`中关于分类的那一小点，因为要区分标签和分类，所以要加前缀
+    * `${tag name}`，无前缀时默认为博文的标签
 2. 为了解决`设计结构3`中的工程化相关问题，封装了一个`issues-originated-hexo-blog`插件，简化此问题。
 
 约束1只要注意就可以了，约束2有一定的技术门槛，不过既然你能搞定hexo博客，那约束2自然不在话下。
@@ -128,7 +128,7 @@ const gitment = new Gitment({
 
 在`issues-originated-hexo-blog`插件情况下的hexo blog依旧可以单独维护一些hexo blog独有的页面，比如About me. 不过请注意一个点：
 
-> 运行`issues-originated-hexo-blog`插件时，插件会以 github issues中`blog-{{unique name}}`的tag里的unique name作为文件名，即`{{unique name}}.md`保存到`/source/_posts`目录下
+> 运行`issues-originated-hexo-blog`插件时，插件会以 github issues中`blog-${unique name}`的tag里的unique name作为文件名，即`{unique name}.md`保存到`/source/_posts`目录下
 
 所以，只要保证在hexo blog中维护的页面文件名不要有冲突即可
 

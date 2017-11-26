@@ -1,5 +1,5 @@
 ---
-title: debug-nodejs
+title: How to debug node line by line
 date: 2017-11-26T11:18:12Z
 categories:
 - tools

@@ -22,7 +22,6 @@ async function run() {
         labels = labels.filter((label) => {
             if (/^blog-(.*)/.test(label.name)) {
                 blogName = label.name.slice(5);
-                metas.push(`title: ${blogName}`)
                 return false;
             } else if (/^cat-/.test(label.name)) {
                 cats.push('- ' + label.name.slice(4));
@@ -38,6 +37,7 @@ async function run() {
             return;
         }
 
+        metas.push(`title: ${blog.title}`)
         // console.log(blog);
         metas.push('date: ' + blog.created_at);
         updateTime[blog.number] = blog.updated_at;
