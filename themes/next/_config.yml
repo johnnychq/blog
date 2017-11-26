@@ -86,11 +86,11 @@ index_with_subtitle: false
 menu:
   home: / || home
   # about: /about/ || user
-  tags: /tags/ || tags
-  categories: /categories/ || th
+  # tags: /tags/ || tags
+  # categories: /categories/ || th
   archives: /archives/ || archive
   #schedule: /schedule/ || calendar
-  sitemap: /sitemap.xml || sitemap
+  # sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
 
 # Enable/Disable menu icons.
