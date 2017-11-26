@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="始信的Blog">
-<meta property="og:url" content="http://johnnychen.cc/index.html">
+<meta name="description" content="如何抹平github issues blog和hexo blog的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。 自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to eliminate the gap between github issues blog and hexo blog">
+<meta property="og:url" content="http://johnnychen.cc/blog/2017/issues-originated-hexo-blog/index.html">
 <meta property="og:site_name" content="始信的Blog">
+<meta property="og:description" content="如何抹平github issues blog和hexo blog的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。 自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂且叫issues-originated-hexo-blog），最后得到的效果：">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-26T16:08:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="始信的Blog">
+<meta name="twitter:title" content="How to eliminate the gap between github issues blog and hexo blog">
+<meta name="twitter:description" content="如何抹平github issues blog和hexo blog的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。 自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂且叫issues-originated-hexo-blog），最后得到的效果：">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://johnnychen.cc/"/>
+  <link rel="canonical" href="http://johnnychen.cc/blog/2017/issues-originated-hexo-blog/"/>
 
 
 
 
 
-  <title>始信的Blog</title>
+  <title>How to eliminate the gap between github issues blog and hexo blog | 始信的Blog</title>
   
 
 
@@ -150,8 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,9 +227,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -256,9 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2017/issues-originated-hexo-blog/" itemprop="url">How to eliminate the gap between github issues blog and hexo blog</a></h1>
+          <h1 class="post-title" itemprop="name headline">How to eliminate the gap between github issues blog and hexo blog</h1>
         
 
         <div class="post-meta">
@@ -306,6 +307,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2017/issues-originated-hexo-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/issues-originated-hexo-blog/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -330,9 +341,7 @@
       
 
       
-        
-          
-            <p>如何抹平<code>github issues blog</code>和<code>hexo blog</code>的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。</p>
+        <p>如何抹平<code>github issues blog</code>和<code>hexo blog</code>的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。</p>
 <p>自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂且叫<code>issues-originated-hexo-blog</code>），最后得到的效果：</p>
 <blockquote>
 <ul>
@@ -401,8 +410,6 @@
 <p>自己设想，是否可以通过webhook通过某种机制间接触发<code>travis</code>呢？</p>
 <p>另外，如果实现了github issues blog和hexo blog的同步，是否更进一步让博文也同步发布到<code>知乎专栏</code>及<code>简书</code>等平台呢？</p>
 
-          
-        
       
     </div>
     
@@ -419,226 +426,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://johnnychen.cc/blog/2017/debug-nodejs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="johnnychen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="始信的Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2017/debug-nodejs/" itemprop="url">How to debug node line by line</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T11:18:12+08:00">
-                2017-11-26
-              </time>
+              <a href="/blog/2017/debug-nodejs/" rel="next" title="How to debug node line by line">
+                <i class="fa fa-chevron-left"></i> How to debug node line by line
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>node如何断点调试？运行时？多进程时？</p>
-<blockquote>
-<p><a href="https://nodejs.org/api/debugger.html" target="_blank" rel="noopener">https://nodejs.org/api/debugger.html</a></p>
-</blockquote>
-<p>请先阅读完上述官方调试章节的api文档。文档中主要介绍了两种启用方式</p>
-<ul>
-<li><code>--debug</code> 方式启用调试，命令行</li>
-<li><code>--inspect</code> 方式启用调试，界面化</li>
-</ul>
-<h2 id="方式一：debug"><a href="#方式一：debug" class="headerlink" title="方式一：debug"></a>方式一：debug</h2><h4 id="官方方案"><a href="#官方方案" class="headerlink" title="官方方案"></a>官方方案</h4><p>方法：<code>node --debug app.js</code></p>
-<p><code>--debug</code>是node提供的最基本方式，启动后会默认开启<code>5858</code>端口，然后就可以侦听该端口进行调试了。尝试访问下5858提供的侦听端口服务把：<a href="http://localhost:5858" target="_blank" rel="noopener">http://localhost:5858</a></p>
-<p>之后，侦听该端口，进行调试，方式及工具很多，官方只提供了命令行方式，</p>
-<ul>
-<li><code>node debug -p &lt;pid&gt;</code> 或</li>
-<li><code>node debug &lt;URI&gt;</code></li>
-</ul>
-<p>备注：</p>
-<blockquote>
-<p>node debug index.js 其实是两条命令的缩写</p>
-<ul>
-<li>node –debug app.js // 假设其pid为10010</li>
-<li>node debug -p 10010</li>
-</ul>
-</blockquote>
-<p>这里不细讲，重点讲基于该端口的社区方案：</p>
-<h3 id="社区扩展"><a href="#社区扩展" class="headerlink" title="社区扩展"></a>社区扩展</h3><p>社区提供了很多其他选择，列下比较知名的两个：</p>
-<ul>
-<li><a href="https://github.com/node-inspector/node-inspector" target="_blank" rel="noopener">node-inspector</a></li>
-<li><a href="http://s-a.github.io/iron-node/" target="_blank" rel="noopener">iron-node</a></li>
-</ul>
-<p>这里重点介绍下<code>node-inspector</code></p>
-<p>安装很简单：<code>npm install -g node-inspector</code></p>
-<p>使用也非常简单：<code>node-debug app.js</code></p>
-<p>但，<code>node-debug app.js</code>其实包含了三个过程</p>
-<ol>
-<li><code>node-inspector</code> 启动8080web服务，访问后是一个CHROME_DEV_TOOLS界面</li>
-<li><code>node --debug app.js</code>这个是最基本、核心的，启用node的<code>--debug</code>模式，暴露默认5858端口。</li>
-<li>访问<code>http://127.0.0.1:8080/?port=5858</code>即可进行调试，node-inspector会通过socket与5858建立长连接，进行调试。</li>
-</ol>
-<p>总结一下前两者：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822659/2d9ae982-068c-11e7-9ac5-6bfaa7d3aab2.png" alt="image"></p>
-<h2 id="方式二：inspect"><a href="#方式二：inspect" class="headerlink" title="方式二：inspect"></a>方式二：inspect</h2><p>方法：<code>node --inspect app.js</code></p>
-<p>其实是把社区的方案直接内置到nodejs中了，不需要安装<code>node-inspector</code>即可以直接用Chrome DevTools进行可视化界面调试。</p>
-<p>此方案直到nodejs v6.3才被node内部支持，具体纳入过程可以参见：<a href="https://nodesource.com/blog/the-10-key-features-in-node-js-v6-lts-boron-after-you-upgrade" target="_blank" rel="noopener">https://nodesource.com/blog/the-10-key-features-in-node-js-v6-lts-boron-after-you-upgrade</a></p>
-<p>纳入后的调用及部署变得简单，对比如下：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822666/58f71f42-068c-11e7-89d8-8cbbf5f0a071.png" alt="image"></p>
-<h2 id="通过IDE进行debug"><a href="#通过IDE进行debug" class="headerlink" title="通过IDE进行debug"></a>通过IDE进行debug</h2><p>debug原理就是上述两种，一些IDE如Webstorm的内置的debug调试也是基于上述原理，采用<code>方式一</code>进行, 只要配置好<code>启动/入口JS</code>文件即可：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23823075/426703d8-0695-11e7-9f94-1dcca56d8caf.png" alt="image"></p>
-<p>Webstorm有两个button, 分别为启动和调试</p>
-<ul>
-<li>启动：用配置的 node <code>启动/入口JS</code></li>
-<li>调试：额外加上调试参数 node <code>启动/入口JS</code> <code>--debug-brk=55077</code> <code>--expose_debug_as=v8debug</code></li>
-</ul>
-<p>由于IDE的高度集成，使得调试体验非常好：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23823065/26d92128-0695-11e7-9a00-02df3967c9fd.png" alt="image"></p>
-<h2 id="关于运行时调试"><a href="#关于运行时调试" class="headerlink" title="关于运行时调试"></a>关于运行时调试</h2><p>已经启动的服务器不想停掉，有办法进行调试吗？</p>
-<ul>
-<li><code>--debug</code>方式有, 对具体node进程传入<code>USR1</code>信号即可： <code>kill -s USR1 &lt;pid&gt;</code></li>
-<li><code>--inspect</code>方式缺乏，有望在node v8.0提供，参见：<a href="https://github.com/nodejs/node/issues/8464" target="_blank" rel="noopener">Debug already running process using v8-inspector?</a></li>
-</ul>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822717/80ff748e-068d-11e7-868c-473c481a2a6f.png" alt="image"></p>
-<h2 id="关于多进程"><a href="#关于多进程" class="headerlink" title="关于多进程"></a>关于多进程</h2><p><code>--inspect</code>方式不会有问题（缺点不提了），因为会对每个进程单独开启一个debug链接，但传统<code>--debug</code>就麻烦了。</p>
-<hr>
-<p>只有一条：请尽可能降维为单进程后再调试。当然，多进程Debug是有方法的，只不过比较麻烦，可以参见：</p>
-<blockquote>
-<p><a href="https://strongloop.com/strongblog/whats-new-nodejs-v0-12-debugging-clusters/" target="_blank" rel="noopener">https://strongloop.com/strongblog/whats-new-nodejs-v0-12-debugging-clusters/</a></p>
-</blockquote>
-<p>另外，针对eggjs，如何进行调试呢？因为即使开发模式，egg也会启动主进程、worker进程及agent 3个进程。比较简单，找出woker进程的pid，运行时设置为<code>--debug</code>模式。其他多进程也可以按照这种方式手动设置后debug。</p>
-<blockquote>
-<p>ps -ef | grep app_worker.js // 找到pid<br>kill -s USR1 [pid]</p>
-</blockquote>
-<p>然后便可以开启<code>node-inspector</code>，在浏览器中Debug了。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>界面化调试偶尔用用即可，不要过于依赖，养成打印日志，通过日志定位、排查问题才是王道。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -648,10 +457,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -659,6 +469,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -679,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -768,6 +598,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于两种blog和gitment插件"><span class="nav-number">1.</span> <span class="nav-text">关于两种blog和gitment插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计结构"><span class="nav-number">2.</span> <span class="nav-text">设计结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#issues-originated-hexo-blog插件的部署"><span class="nav-number">3.</span> <span class="nav-text">issues-originated-hexo-blog插件的部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-先安装issues-originated-hexo-blog插件"><span class="nav-number">3.1.</span> <span class="nav-text">I. 先安装issues-originated-hexo-blog插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-将gitment的配置文件初始化代码部分改为"><span class="nav-number">3.2.</span> <span class="nav-text">II.将gitment的配置文件初始化代码部分改为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#III-最后，运行一条命令即可"><span class="nav-number">3.3.</span> <span class="nav-text">III. 最后，运行一条命令即可</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于hexo-blog的说明"><span class="nav-number">4.</span> <span class="nav-text">关于hexo blog的说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">5.</span> <span class="nav-text">后续</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -908,6 +754,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -954,6 +804,39 @@
 
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+
+        function getCommentId(){
+          let path = window.location.pathname;
+          if(path[path.length - 1] === '/'){
+            path =  path.substr(0, path.length -1);
+          }
+          path =  'blog-' + path.split('/').pop();
+          return path;
+        }
+        var gitment = new Gitmint({
+            id: getCommentId(),
+            owner: 'johnnychen',
+            repo: 'blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '72395118edd7c93c165d5c03d206d1d225658e85',
+            
+                client_id: '664c819fea18e0b92824'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 
