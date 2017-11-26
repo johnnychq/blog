@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 始信的Blog
 subtitle:
 description:
-author: John Doe
-language:
+author: johnnychen
+language: zh-Hans
 timezone:
 
 # URL
@@ -68,4 +68,6 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/johnnychen/blog
+  branch: gh-pages
