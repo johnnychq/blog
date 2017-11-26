@@ -67,7 +67,7 @@ categories:
 ```
 {
     "scripts": {
-         "deploy": "issues-originated-hexo-blog",
+         "deploy": "issues-originated-hexo-blog https://api.github.com/repos/johnnychen/blog",
          "postdeploy": "git add . && git commit -m 'update posts' && git push -u origin master && hexo d -g"
     }
 }

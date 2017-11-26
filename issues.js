@@ -2,9 +2,14 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const argv = process.argv;
+const blogUrl = argv[2];
+const assert = require('assert');
+
+assert(blogUrl, '请输入github blog地址');
 
 async function run() {
-    const response = await axios('https://api.github.com/repos/johnnychen/blog/issues');
+    const response = await axios(blogUrl + '/issues');
     const articles = response.data;
 
     let updateTime = {};

@@ -6,7 +6,7 @@
     "version": "3.4.2"
   },
   "scripts": {
-    "deploy": "node ./issues.js && npm run publish-git",
+    "deploy": "node ./issues.js https://api.github.com/repos/johnnychen/blog && npm run publish-git",
     "publish-git": "git add . && git commit -m 'update posts' && git push -u origin master && npm run publish-hexo",
     "publish-hexo": "hexo d -g"
   },
