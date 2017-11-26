@@ -1,0 +1,35 @@
+language: node_js
+node_js: stable
+
+# Travis-CI Caching
+cache:
+  directories:
+    - node_modules
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+before_script:
+  - npm install -g gulp
+
+script:
+  - gulp dist
+
+after_script:
+  - cd dist
+  - git init
+  - git config user.name "johnnychen"
+  - git config user.email "johnnychq@gmail.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+# E: Build LifeCycle
+
+branches:
+  only:
+    - master
+env:
+ global:
+   - GH_REF: github.com/johnnychen/blog.git
+   - secure: "kmrM048USunqbHvelpjU3Ao/SPCfY8MVlCITSVtqcpQ1bkp0wOlWlZGizNfloBEWOrPwndFA+Tnzr+QZsGVnFsG4aXYokuCpwW4oxTAh1IWaN08mdazxUJx6uQad7Jn3FMBzZ5fR2C5IK59Hx6plZR1wnPGOH+SwR7nR2H8lDKhtVl+88p3LtqmggfXb5DjOppzCjb7kOkjLuPTKAE0bzs99/bUXQgebh3XfRBt4FIpxSrdmMYwnseTdv3R4WwLAVL9YpgAZOfkVjf1zGIHBrQnI5STF8djS0+/Pe59T8qHuaC9XM7GIBn2AunfauwrHvwsxgj1IBtSq7Of/uoaeSv1/KqWxWwVWvXgsJfRj1nONXGv0WdnKQNgxxi6WS4JTn6tP+gvB7BG7P5P8L4eV6Y4cInR45leFWuC/WX7l12HG3ZxPot7YFwtQnVhlqxyc3WIeKrKXgLo4MgZtx7GC5YRZ2LDLt1m2pf3I299iuEQsyNByoLx16SlggBIIhjljX/30xP3w3TKFHfBJiAFknZ8T9Hr84iXt4GMI1oz9zlz2FsiFm23FNUfE7tCG+VBzlpFADi3CzVZ+cOExucZ+wBLlaFERQymgH8CDnlimqhwTjn5ZVOk3+49B7Vuv0AhbeBpApXFyC9F0wFik6dqsRgbqLymE0bwNJ6SeCZNhM2M="
