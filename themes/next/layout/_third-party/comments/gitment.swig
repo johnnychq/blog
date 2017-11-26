@@ -22,8 +22,17 @@
     {% if page.comments %}
       <script type="text/javascript">
       function renderGitment(){
+
+        function getCommentId(){
+          let path = window.location.pathname;
+          if(path[path.length - 1] === '/'){
+            path =  path.substr(0, path.length -1);
+          }
+          path =  'blog-' + path.split('/').pop();
+          return path;
+        }
         var gitment = new {{CommentsClass}}({
-            id: window.location.pathname, 
+            id: getCommentId(),
             owner: '{{ theme.gitment.github_user }}',
             repo: '{{ theme.gitment.github_repo }}',
             {% if theme.gitment.mint %}
