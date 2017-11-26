@@ -132,6 +132,14 @@ const gitment = new Gitment({
 
 所以，只要保证在hexo blog中维护的页面文件名不要有冲突即可
 
+## 真实Demo
+
+可以参见本博客：
+
+* `github issues blog`: https://github.com/johnnychen/blog/issues/
+* `hexo blog`: http://johnnychen.cc
+* `hexo 源码及工程目录`: https://github.com/johnnychen/blog
+
 ## 后续
 
 关于约束2，即手动运行`npm run  deploy`部署、同步hexo blog的过程可以想方设法实现自动化。
