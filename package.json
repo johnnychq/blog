@@ -1,9 +1,13 @@
 {
-  "name": "hexo-site",
+  "name": "johnny-blog",
   "version": "0.0.0",
   "private": true,
   "hexo": {
     "version": "3.4.2"
+  },
+  "scripts": {
+    "deploy": "git add . && git commit -m 'update posts' && git push",
+    "postdeploy": "hexo d -g"
   },
   "dependencies": {
     "hexo": "^3.2.0",
