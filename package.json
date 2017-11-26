@@ -6,10 +6,12 @@
     "version": "3.4.2"
   },
   "scripts": {
-    "deploy": "git add . && git commit -m 'update posts' && git push -u origin master",
-    "postdeploy": "hexo d -g"
+    "deploy": "node ./issues.js && npm run publish-git",
+    "publish-git": "git add . && git commit -m 'update posts' && git push -u origin master && npm run publish-hexo",
+    "publish-hexo": "hexo d -g"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "hexo": "^3.2.0",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.4",
