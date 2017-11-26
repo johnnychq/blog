@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="始信的Blog">
 <meta property="og:description" content="如何抹平github issues blog和hexo blog的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。 自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂且叫issues-originated-hexo-blog），最后得到的效果：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-26T16:13:38.000Z">
+<meta property="og:updated_time" content="2017-11-26T16:26:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to eliminate the gap between github issues blog and hexo blog">
 <meta name="twitter:description" content="如何抹平github issues blog和hexo blog的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。 自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂且叫issues-originated-hexo-blog），最后得到的效果：">
@@ -405,6 +405,12 @@
 <p>运行<code>issues-originated-hexo-blog</code>插件时，插件会以 github issues中<code>blog-${unique name}</code>的tag里的unique name作为文件名，即<code>{unique name}.md</code>保存到<code>/source/_posts</code>目录下</p>
 </blockquote>
 <p>所以，只要保证在hexo blog中维护的页面文件名不要有冲突即可</p>
+<h2 id="真实Demo"><a href="#真实Demo" class="headerlink" title="真实Demo"></a>真实Demo</h2><p>可以参见本博客：</p>
+<ul>
+<li><code>github issues blog</code>: <a href="https://github.com/johnnychen/blog/issues/" target="_blank" rel="noopener">https://github.com/johnnychen/blog/issues/</a></li>
+<li><code>hexo blog</code>: <a href="http://johnnychen.cc">http://johnnychen.cc</a></li>
+<li><code>hexo 源码及工程目录</code>: <a href="https://github.com/johnnychen/blog" target="_blank" rel="noopener">https://github.com/johnnychen/blog</a></li>
+</ul>
 <h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>关于约束2，即手动运行<code>npm run  deploy</code>部署、同步hexo blog的过程可以想方设法实现自动化。</p>
 <p>想过<code>travis</code>, 不过travis只支持源码的push及MR事件，无法捕获issues相关事件。可以通过web hook达到效果，但需要一个在线编译环境，比如自己的vps，但增加了复杂度。</p>
 <p>自己设想，是否可以通过webhook通过某种机制间接触发<code>travis</code>呢？</p>
@@ -608,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于两种blog和gitment插件"><span class="nav-number">1.</span> <span class="nav-text">关于两种blog和gitment插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计结构"><span class="nav-number">2.</span> <span class="nav-text">设计结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#issues-originated-hexo-blog插件的部署"><span class="nav-number">3.</span> <span class="nav-text">issues-originated-hexo-blog插件的部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-先安装issues-originated-hexo-blog插件"><span class="nav-number">3.1.</span> <span class="nav-text">I. 先安装issues-originated-hexo-blog插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-将gitment的配置文件初始化代码部分改为"><span class="nav-number">3.2.</span> <span class="nav-text">II.将gitment的配置文件初始化代码部分改为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#III-最后，运行一条命令即可"><span class="nav-number">3.3.</span> <span class="nav-text">III. 最后，运行一条命令即可</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于hexo-blog的说明"><span class="nav-number">4.</span> <span class="nav-text">关于hexo blog的说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">5.</span> <span class="nav-text">后续</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于两种blog和gitment插件"><span class="nav-number">1.</span> <span class="nav-text">关于两种blog和gitment插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计结构"><span class="nav-number">2.</span> <span class="nav-text">设计结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#issues-originated-hexo-blog插件的部署"><span class="nav-number">3.</span> <span class="nav-text">issues-originated-hexo-blog插件的部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-先安装issues-originated-hexo-blog插件"><span class="nav-number">3.1.</span> <span class="nav-text">I. 先安装issues-originated-hexo-blog插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-将gitment的配置文件初始化代码部分改为"><span class="nav-number">3.2.</span> <span class="nav-text">II.将gitment的配置文件初始化代码部分改为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#III-最后，运行一条命令即可"><span class="nav-number">3.3.</span> <span class="nav-text">III. 最后，运行一条命令即可</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于hexo-blog的说明"><span class="nav-number">4.</span> <span class="nav-text">关于hexo blog的说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#真实Demo"><span class="nav-number">5.</span> <span class="nav-text">真实Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">6.</span> <span class="nav-text">后续</span></a></li></ol></div>
             
 
           </div>

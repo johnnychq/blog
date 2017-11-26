@@ -396,6 +396,12 @@
 <p>运行<code>issues-originated-hexo-blog</code>插件时，插件会以 github issues中<code>blog-${unique name}</code>的tag里的unique name作为文件名，即<code>{unique name}.md</code>保存到<code>/source/_posts</code>目录下</p>
 </blockquote>
 <p>所以，只要保证在hexo blog中维护的页面文件名不要有冲突即可</p>
+<h2 id="真实Demo"><a href="#真实Demo" class="headerlink" title="真实Demo"></a>真实Demo</h2><p>可以参见本博客：</p>
+<ul>
+<li><code>github issues blog</code>: <a href="https://github.com/johnnychen/blog/issues/" target="_blank" rel="noopener">https://github.com/johnnychen/blog/issues/</a></li>
+<li><code>hexo blog</code>: <a href="http://johnnychen.cc">http://johnnychen.cc</a></li>
+<li><code>hexo 源码及工程目录</code>: <a href="https://github.com/johnnychen/blog" target="_blank" rel="noopener">https://github.com/johnnychen/blog</a></li>
+</ul>
 <h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>关于约束2，即手动运行<code>npm run  deploy</code>部署、同步hexo blog的过程可以想方设法实现自动化。</p>
 <p>想过<code>travis</code>, 不过travis只支持源码的push及MR事件，无法捕获issues相关事件。可以通过web hook达到效果，但需要一个在线编译环境，比如自己的vps，但增加了复杂度。</p>
 <p>自己设想，是否可以通过webhook通过某种机制间接触发<code>travis</code>呢？</p>
