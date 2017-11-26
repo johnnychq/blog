@@ -6,9 +6,8 @@
     "version": "3.4.2"
   },
   "scripts": {
-    "deploy": "node ./issues.js https://api.github.com/repos/johnnychen/blog && npm run publish-git",
-    "publish-git": "git add . && git commit -m 'update posts' && git push -u origin master && npm run publish-hexo",
-    "publish-hexo": "hexo d -g"
+    "deploy": "issues-originated-hexo-blog https://api.github.com/repos/johnnychen/blog",
+    "postdeploy": "git add . && git commit -m 'update posts' && git push -u origin master && npm hexo d -g"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -22,6 +21,7 @@
     "hexo-renderer-marked": "^0.2.10",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0",
+    "issues-originated-hexo-blog": "^0.0.1",
     "uglify-js": "^3.2.0"
   }
 }
