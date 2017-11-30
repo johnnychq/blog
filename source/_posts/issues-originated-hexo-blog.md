@@ -64,7 +64,7 @@ categories:
 
 然后配置 `package.json`的 script部分
 
-```
+```json
 {
     "scripts": {
          "deploy": "issues-originated-hexo-blog https://api.github.com/repos/johnnychen/blog",
@@ -76,7 +76,7 @@ categories:
 ### II.将`gitment`的配置文件初始化代码部分改为
 
 由
-```
+```javascript
 const gitment = new Gitment({
   id: 'Your page ID', // optional
   owner: 'Your GitHub ID',
@@ -91,7 +91,7 @@ const gitment = new Gitment({
 ```
 
 改为
-```
+```javascript
 function getCommentId(){
   let path = window.location.pathname;
   if(path[path.length - 1] === '/'){
