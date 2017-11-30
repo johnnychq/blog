@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Johnny Blog</title>
+  <title>Johnny&#39;s Blog</title>
   
   <subtitle>World is open for you to enjoy</subtitle>
   <link href="/atom.xml" rel="self"/>
