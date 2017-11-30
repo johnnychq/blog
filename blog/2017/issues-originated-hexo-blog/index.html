@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -73,6 +80,10 @@
 
 
 
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Johnny Blog" type="application/atom+xml" />
 
 
 
@@ -83,10 +94,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to eliminate the gap between github issues blog and hexo blog">
 <meta property="og:url" content="http://johnnychen.cc/blog/2017/issues-originated-hexo-blog/index.html">
-<meta property="og:site_name" content="始信的Blog">
+<meta property="og:site_name" content="Johnny Blog">
 <meta property="og:description" content="如何抹平github issues blog和hexo blog的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。 自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂且叫issues-originated-hexo-blog），最后得到的效果：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-26T16:26:02.000Z">
+<meta property="og:updated_time" content="2017-11-30T14:12:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to eliminate the gap between github issues blog and hexo blog">
 <meta name="twitter:description" content="如何抹平github issues blog和hexo blog的鸿沟呢？指的是既可以拥有自定义的hexo博客，又可以享用github issues的便捷性，且尽可能的只维护其中一份即可。 自己分别研究了这两种博客机制，并结合gitment插件，设计了以github issues为源且兼顾hexo的一种博客维护方法（暂且叫issues-originated-hexo-blog），最后得到的效果：">
@@ -125,7 +136,7 @@
 
 
 
-  <title>How to eliminate the gap between github issues blog and hexo blog | 始信的Blog</title>
+  <title>How to eliminate the gap between github issues blog and hexo blog | Johnny Blog</title>
   
 
 
@@ -165,12 +176,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">始信的Blog</span>
+        <span class="site-title">Johnny Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">World is open for you to enjoy</p>
       
   </div>
 
@@ -196,6 +207,26 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -245,13 +276,13 @@
     <link itemprop="mainEntityOfPage" href="http://johnnychen.cc/blog/2017/issues-originated-hexo-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="johnnychen">
+      <meta itemprop="name" content="始信">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="始信的Blog">
+      <meta itemprop="name" content="Johnny Blog">
     </span>
 
     
@@ -391,9 +422,9 @@
 </blockquote>
 <p>备注：请保证node版本在<code>v8.9</code>及以上</p>
 <p>然后配置 <code>package.json</code>的 script部分</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;scripts&quot;: &#123;</span><br><span class="line">         &quot;deploy&quot;: &quot;issues-originated-hexo-blog https://api.github.com/repos/johnnychen/blog&quot;,</span><br><span class="line">         &quot;postdeploy&quot;: &quot;git add . &amp;&amp; git commit -m &apos;update posts&apos; &amp;&amp; git push -u origin master &amp;&amp; hexo d -g&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="II-将gitment的配置文件初始化代码部分改为"><a href="#II-将gitment的配置文件初始化代码部分改为" class="headerlink" title="II.将gitment的配置文件初始化代码部分改为"></a>II.将<code>gitment</code>的配置文件初始化代码部分改为</h3><p>由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const gitment = new Gitment(&#123;</span><br><span class="line">  id: &apos;Your page ID&apos;, // optional</span><br><span class="line">  owner: &apos;Your GitHub ID&apos;,</span><br><span class="line">  repo: &apos;The repo to store comments&apos;,</span><br><span class="line">  oauth: &#123;</span><br><span class="line">    client_id: &apos;Your client ID&apos;,</span><br><span class="line">    client_secret: &apos;Your client secret&apos;,</span><br><span class="line">  &#125;,</span><br><span class="line">  // ...</span><br><span class="line">  // For more available options, check out the documentation below</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function getCommentId()&#123;</span><br><span class="line">  let path = window.location.pathname;</span><br><span class="line">  if(path[path.length - 1] === &apos;/&apos;)&#123;</span><br><span class="line">    path =  path.substr(0, path.length -1);</span><br><span class="line">  &#125;</span><br><span class="line">  path =  &apos;blog-&apos; + path.split(&apos;/&apos;).pop();</span><br><span class="line">  return path;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const gitment = new Gitment(&#123;</span><br><span class="line">  id: getCommentId(), // optional</span><br><span class="line">  owner: &apos;Your GitHub ID&apos;,</span><br><span class="line">  repo: &apos;The repo to store comments&apos;,</span><br><span class="line">  oauth: &#123;</span><br><span class="line">    client_id: &apos;Your client ID&apos;,</span><br><span class="line">    client_secret: &apos;Your client secret&apos;,</span><br><span class="line">  &#125;,</span><br><span class="line">  // ...</span><br><span class="line">  // For more available options, check out the documentation below</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">         <span class="attr">"deploy"</span>: <span class="string">"issues-originated-hexo-blog https://api.github.com/repos/johnnychen/blog"</span>,</span><br><span class="line">         <span class="attr">"postdeploy"</span>: <span class="string">"git add . &amp;&amp; git commit -m 'update posts' &amp;&amp; git push -u origin master &amp;&amp; hexo d -g"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="II-将gitment的配置文件初始化代码部分改为"><a href="#II-将gitment的配置文件初始化代码部分改为" class="headerlink" title="II.将gitment的配置文件初始化代码部分改为"></a>II.将<code>gitment</code>的配置文件初始化代码部分改为</h3><p>由<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gitment = <span class="keyword">new</span> Gitment(&#123;</span><br><span class="line">  id: <span class="string">'Your page ID'</span>, <span class="comment">// optional</span></span><br><span class="line">  owner: <span class="string">'Your GitHub ID'</span>,</span><br><span class="line">  repo: <span class="string">'The repo to store comments'</span>,</span><br><span class="line">  oauth: &#123;</span><br><span class="line">    client_id: <span class="string">'Your client ID'</span>,</span><br><span class="line">    client_secret: <span class="string">'Your client secret'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// For more available options, check out the documentation below</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>改为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCommentId</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> path = <span class="built_in">window</span>.location.pathname;</span><br><span class="line">  <span class="keyword">if</span>(path[path.length - <span class="number">1</span>] === <span class="string">'/'</span>)&#123;</span><br><span class="line">    path =  path.substr(<span class="number">0</span>, path.length <span class="number">-1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  path =  <span class="string">'blog-'</span> + path.split(<span class="string">'/'</span>).pop();</span><br><span class="line">  <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> gitment = <span class="keyword">new</span> Gitment(&#123;</span><br><span class="line">  id: getCommentId(), <span class="comment">// optional</span></span><br><span class="line">  owner: <span class="string">'Your GitHub ID'</span>,</span><br><span class="line">  repo: <span class="string">'The repo to store comments'</span>,</span><br><span class="line">  oauth: &#123;</span><br><span class="line">    client_id: <span class="string">'Your client ID'</span>,</span><br><span class="line">    client_secret: <span class="string">'Your client secret'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// For more available options, check out the documentation below</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>核心是<code>getCommentId()</code>，gitment初始化的其余部分略去</p>
 <h3 id="III-最后，运行一条命令即可"><a href="#III-最后，运行一条命令即可" class="headerlink" title="III. 最后，运行一条命令即可"></a>III. 最后，运行一条命令即可</h3><p>上述两个步骤完成后，想同步<code>github issues blog</code>的内容时，只需要运行</p>
 <blockquote>
@@ -520,8 +551,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">johnnychen</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="始信" />
+            
+              <p class="site-author-name" itemprop="name">始信</p>
+              <p class="site-description motion-element" itemprop="description">困苦虐我千百遍，始信</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -553,7 +588,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -561,6 +596,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           <div class="links-of-author motion-element">
@@ -588,6 +630,18 @@
                   <a href="https://www.facebook.com/profile.php?id=100011726287177" target="_blank" title="FB Page">
                     
                       <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/johnnychq" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/johnnychq" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
                 </span>
               
             
@@ -638,7 +692,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">johnnychen</span>
+  <span class="author" itemprop="copyrightHolder">始信</span>
 
   
 </div>
@@ -705,6 +759,9 @@
 
 
 
+  
+  
+
 
 
 
@@ -737,6 +794,16 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
   
 
 
