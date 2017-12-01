@@ -1,6 +1,7 @@
 ---
 title: How to eliminate the gap between github issues blog and hexo blog
 date: 2017-11-26T15:55:13Z
+updated: 2017-11-30T13:39:51Z
 categories:
 - tools
 ---

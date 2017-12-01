@@ -1,6 +1,7 @@
 ---
 title: How to debug node line by line
 date: 2017-11-26T11:18:12Z
+updated: 2017-11-26T14:36:54Z
 categories:
 - tools
 tags:
