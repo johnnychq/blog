@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Johnny&#39;s Blog">
 <meta property="og:description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn情况下覆盖式发布和非覆盖式发布 不过，答案中未对时间戳如何更新到HTML中作详">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-03T03:32:05.000Z">
+<meta property="og:updated_time" content="2017-12-03T03:35:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML及其时间戳部署">
 <meta name="twitter:description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn情况下覆盖式发布和非覆盖式发布 不过，答案中未对时间戳如何更新到HTML中作详">
@@ -317,7 +317,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T11:32:05+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T11:35:23+08:00">
                 2017-12-03
               </time>
             
@@ -415,8 +415,7 @@
 </ul>
 <p>HTML与静态资源如果不在同一个仓库时，必须建立一个中间存储机制，保存静态资源文件对应的时间戳，然后在HTML编译或运行时环境中，获取并匹配中间存储对应的时间戳进行更新/部署。</p>
 <p>幸运的是，现在主流的研发模式里，越来越推崇<code>全栈</code>或<code>纯粹的前后端分离</code>了，两种方式都极大的简化了时间戳的部署方式。尤其是后者，更加简单，Webpack提供了专门的html插件，自动创建html的同时帮你完成时间戳部署的事情。</p>
-<p>###HTML部署的哪里</p>
-<p>在传统开发中，HTML均以服务端模板的方式存在于应用服务器中，通过域名<code>www.xxx.com</code>即可访问。其中，静态资源如果同机部署的话，也可以用www.xxx.com进行访问；如果静态资源分开部署到了oss/cdn中的话，则用要用<code>static.xxx.com</code>访问，但不影响用www.xxx.com访问HTML。</p>
+<h3 id="HTML部署的哪里"><a href="#HTML部署的哪里" class="headerlink" title="HTML部署的哪里"></a>HTML部署的哪里</h3><p>在传统开发中，HTML均以服务端模板的方式存在于应用服务器中，通过域名<code>www.xxx.com</code>即可访问。其中，静态资源如果同机部署的话，也可以用www.xxx.com进行访问；如果静态资源分开部署到了oss/cdn中的话，则用要用<code>static.xxx.com</code>访问，但不影响用www.xxx.com访问HTML。</p>
 <p>但在<code>纯粹的前后端分离</code>方案中，如果把HTML当做普通静态资源部署到oss/cdn中的话，就只能通过<code>static.xxx.com/index.html</code>访问到HTML文件，这对用户极其不友好，我们传达给用户的域名应该是<code>www.xxx.com</code>；另外，也无法做不同路径url映射同一个html的功能(browserHistory)。所以需要对这种情况下的HTML部署做特殊处理。</p>
 <p><code>纯粹的前后端分离</code>在部署时，将HTML作为特殊静态资源，单独打包部署到nginx中；其他资源单独部署到oss/cdn中。这个主要影响的是打包和部署策略，跟运维同学沟通清楚即可。</p>
 <p>上述问题只会存在于将普通静态资源单独部署到oss/cdn情况，且采用<code>纯粹的前后端分离</code>方案下，其他情况不存在此问题。但因为<code>纯粹的前后端分离</code>是当下主流的研发模式，且涉及运维层面（前端对运维可能不是特别清楚），因此单独提出来。</p>
@@ -717,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于时间戳"><span class="nav-number">1.</span> <span class="nav-text">关于时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于HTML及其时间戳"><span class="nav-number">2.</span> <span class="nav-text">关于HTML及其时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影响部署方案的三个方面"><span class="nav-number">3.</span> <span class="nav-text">影响部署方案的三个方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML存储在哪里"><span class="nav-number">3.1.</span> <span class="nav-text">HTML存储在哪里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决过程采用编译时还是运行时"><span class="nav-number">3.2.</span> <span class="nav-text">解决过程采用编译时还是运行时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见开发模式下的HTML及其时间戳部署"><span class="nav-number">4.</span> <span class="nav-text">常见开发模式下的HTML及其时间戳部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#纯粹前后端分离"><span class="nav-number">4.1.</span> <span class="nav-text">纯粹前后端分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（同一仓库）"><span class="nav-number">4.2.</span> <span class="nav-text">传统前后端分离（同一仓库）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（分开仓库-编译时）"><span class="nav-number">4.3.</span> <span class="nav-text">传统前后端分离（分开仓库/编译时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（分开仓库-运行时）"><span class="nav-number">4.4.</span> <span class="nav-text">传统前后端分离（分开仓库/运行时）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于时间戳"><span class="nav-number">1.</span> <span class="nav-text">关于时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于HTML及其时间戳"><span class="nav-number">2.</span> <span class="nav-text">关于HTML及其时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影响部署方案的三个方面"><span class="nav-number">3.</span> <span class="nav-text">影响部署方案的三个方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML存储在哪里"><span class="nav-number">3.1.</span> <span class="nav-text">HTML存储在哪里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML部署的哪里"><span class="nav-number">3.2.</span> <span class="nav-text">HTML部署的哪里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决过程采用编译时还是运行时"><span class="nav-number">3.3.</span> <span class="nav-text">解决过程采用编译时还是运行时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见开发模式下的HTML及其时间戳部署"><span class="nav-number">4.</span> <span class="nav-text">常见开发模式下的HTML及其时间戳部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#纯粹前后端分离"><span class="nav-number">4.1.</span> <span class="nav-text">纯粹前后端分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（同一仓库）"><span class="nav-number">4.2.</span> <span class="nav-text">传统前后端分离（同一仓库）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（分开仓库-编译时）"><span class="nav-number">4.3.</span> <span class="nav-text">传统前后端分离（分开仓库/编译时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（分开仓库-运行时）"><span class="nav-number">4.4.</span> <span class="nav-text">传统前后端分离（分开仓库/运行时）</span></a></li></ol></li></ol></div>
             
 
           </div>
