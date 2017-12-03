@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="timestamp,编译,运维,部署," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Johnny's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn">
+<meta name="keywords" content="timestamp,编译,运维,部署">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML及其时间戳部署">
+<meta property="og:url" content="http://johnnychen.cc/blog/2017/html-and-its-timesamp/index.html">
+<meta property="og:site_name" content="Johnny&#39;s Blog">
+<meta property="og:description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn情况下覆盖式发布和非覆盖式发布 不过，答案中未对时间戳如何更新到HTML中作详">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-03T03:32:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML及其时间戳部署">
+<meta name="twitter:description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn情况下覆盖式发布和非覆盖式发布 不过，答案中未对时间戳如何更新到HTML中作详">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://johnnychen.cc/blog/2017/html-and-its-timesamp/"/>
+
+
+
+
+
+  <title>HTML及其时间戳部署 | Johnny's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4641f9668519e3964b6608dad90a88d5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnny's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">World is open for you to enjoy</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://johnnychen.cc/blog/2017/html-and-its-timesamp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="始信">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTML及其时间戳部署</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T11:32:05+08:00">
+                2017-12-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T11:32:05+08:00">
+                2017-12-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2017/html-and-its-timesamp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/html-and-its-timesamp/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。</p>
+</blockquote>
+<h2 id="关于时间戳"><a href="#关于时间戳" class="headerlink" title="关于时间戳"></a>关于时间戳</h2><p>关于前端资源时间戳问题，知乎上有个经典的回答 <a href="https://www.zhihu.com/question/20790576/answer/32602154" target="_blank" rel="noopener">大公司里怎样开发和部署前端代码</a>，详细讲述了，时间戳问题的起因以及对应2种解决方案：</p>
+<ul>
+<li><code>手动维护时间戳</code></li>
+<li><code>信息摘要时间戳</code></li>
+</ul>
+<p>以及在静态资源部署在cdn情况下<code>覆盖式发布</code>和<code>非覆盖式发布</code></p>
+<p>不过，答案中未对时间戳如何更新到HTML中作详细的介绍，本文主要讲解这个<code>HTML及其时间戳部署</code>问题及解决方案</p>
+<blockquote>
+<p>接下来的讨论，假定用的是<code>信息摘要时间戳</code>以及<code>非覆盖式发布机制</code></p>
+</blockquote>
+<h2 id="关于HTML及其时间戳"><a href="#关于HTML及其时间戳" class="headerlink" title="关于HTML及其时间戳"></a>关于HTML及其时间戳</h2><p>时间戳部署问题，指的是将生成的时间戳更新到对应HTML的资源引用链接当中，当资源内容发生变化后，通过工程化的手段，自动更新对应的时间戳。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"http://static.xxx.com/a_&#123;timestamp&#125;.css"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://static.xxx.com/a_&#123;timestapm&#125;.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>页面刷新时，用户永远能够访问到最新的文件内容，即通过一种机制让<code>timestamp</code>永远保持最新。</p>
+<h2 id="影响部署方案的三个方面"><a href="#影响部署方案的三个方面" class="headerlink" title="影响部署方案的三个方面"></a>影响部署方案的三个方面</h2><p>不同条件下的部署方案是不同的，主要受 <code>HTML存储在哪里</code>，<code>HTML部署的哪里</code>，<code>解决过程采用编译时还是运行时</code>三方面的影响。</p>
+<h3 id="HTML存储在哪里"><a href="#HTML存储在哪里" class="headerlink" title="HTML存储在哪里"></a>HTML存储在哪里</h3><p>这里的<code>HTML存储的哪里</code>指的是在代码托管上，HTML(也可能是服务端模板)是否与静态资源(js/css/img)在同一个代码仓库中。不关心HTML是否是服务端(java/php/nodejs)模板生成，只要是在同一个代码仓库，文件层面上在一起即可。</p>
+<p>是否在同一代码仓库中非常重要，因为如果是，那么在文件目录结构上HTML与资源具有物理上的关联，那么在生成文件时间戳的同时可以根据关联关系立即更新/部署对应HTML的时间戳；否的话，必须提供一种异步机制，让二者产生关联。</p>
+<ul>
+<li>HTML与静态资源统一管理的场景:<ul>
+<li><code>传统/全栈开发</code>，所有代码均在一起，包括html和静态资源</li>
+<li><code>纯粹的前后端分离</code>，指除了数据/渲染上的前后端分离外，对应的HTML本身也在源码管理及部署层面上与后端应用进行剥离，作为资源交由前端进行管理。</li>
+</ul>
+</li>
+<li>非HTML与静态资源统一管理的场景:<ul>
+<li><code>传统的前后端分离</code>，指对数据/渲染进行前后端分离，但HTML还存在方后端模板中</li>
+</ul>
+</li>
+</ul>
+<p>HTML与静态资源如果不在同一个仓库时，必须建立一个中间存储机制，保存静态资源文件对应的时间戳，然后在HTML编译或运行时环境中，获取并匹配中间存储对应的时间戳进行更新/部署。</p>
+<p>幸运的是，现在主流的研发模式里，越来越推崇<code>全栈</code>或<code>纯粹的前后端分离</code>了，两种方式都极大的简化了时间戳的部署方式。尤其是后者，更加简单，Webpack提供了专门的html插件，自动创建html的同时帮你完成时间戳部署的事情。</p>
+<p>###HTML部署的哪里</p>
+<p>在传统开发中，HTML均以服务端模板的方式存在于应用服务器中，通过域名<code>www.xxx.com</code>即可访问。其中，静态资源如果同机部署的话，也可以用www.xxx.com进行访问；如果静态资源分开部署到了oss/cdn中的话，则用要用<code>static.xxx.com</code>访问，但不影响用www.xxx.com访问HTML。</p>
+<p>但在<code>纯粹的前后端分离</code>方案中，如果把HTML当做普通静态资源部署到oss/cdn中的话，就只能通过<code>static.xxx.com/index.html</code>访问到HTML文件，这对用户极其不友好，我们传达给用户的域名应该是<code>www.xxx.com</code>；另外，也无法做不同路径url映射同一个html的功能(browserHistory)。所以需要对这种情况下的HTML部署做特殊处理。</p>
+<p><code>纯粹的前后端分离</code>在部署时，将HTML作为特殊静态资源，单独打包部署到nginx中；其他资源单独部署到oss/cdn中。这个主要影响的是打包和部署策略，跟运维同学沟通清楚即可。</p>
+<p>上述问题只会存在于将普通静态资源单独部署到oss/cdn情况，且采用<code>纯粹的前后端分离</code>方案下，其他情况不存在此问题。但因为<code>纯粹的前后端分离</code>是当下主流的研发模式，且涉及运维层面（前端对运维可能不是特别清楚），因此单独提出来。</p>
+<h3 id="解决过程采用编译时还是运行时"><a href="#解决过程采用编译时还是运行时" class="headerlink" title="解决过程采用编译时还是运行时"></a>解决过程采用编译时还是运行时</h3><blockquote>
+<p>能够预编译解决的问题，尽可能的不要选择运行时，让生产环境保持简单意味着生产环境更加稳定和高效。</p>
+</blockquote>
+<p>代码的上线过程：开发 -&gt; 发布 -&gt; 运行，时间戳的部署可以选择在发布过程中的预编译环节，也可以在运行时解决，优先选择编译时。</p>
+<p>在<code>HTML存储在哪里</code>小节中其实已经讲过了，如果HTML与静态文件在同一仓库，那么预编译时，在生成静态文件时间戳的同时，根据仓库的文件路径关系，找到对应的HTML页面，更新/部署对应的时间戳即可。所以<code>全栈开发</code>, <code>纯粹前后端分离</code>开发的同学尽情享用这种方式把。</p>
+<p>如果HTML与静态文件隶属不同仓库，就麻烦了，那先编译生成静态文件时间戳并存储到中间存储；再编译HTML，与此同时获取刚才中间存储中的最新时间戳；最后更新/部署HTML中的时间戳。不过这里有个<strong>缺点</strong>：<code>编译时序依赖</code>，要求你在发布前，要严格保证发布的顺序，先发布前端仓库，后发布后端。人肉保证比较困难，系统保证感觉有点重，自己权衡把。</p>
+<p><code>运行时</code>动态获取最新时间戳可以解决<code>编译时序依赖</code>问题，但必须通过模板宏及运行时获取中间存储时间戳的机制，增加了生产环境的复杂度。</p>
+<h2 id="常见开发模式下的HTML及其时间戳部署"><a href="#常见开发模式下的HTML及其时间戳部署" class="headerlink" title="常见开发模式下的HTML及其时间戳部署"></a>常见开发模式下的HTML及其时间戳部署</h2><p>前文讲解偏理论，本文看下常见前后端开发模式下的具体案例，假定前端资源基于webpack。</p>
+<h3 id="纯粹前后端分离"><a href="#纯粹前后端分离" class="headerlink" title="纯粹前后端分离"></a>纯粹前后端分离</h3><blockquote>
+<p>此模式下，HTML与静态资源统一存放，部署时假定要求cdn，无视服务端代码是否同一仓库</p>
+</blockquote>
+<ol>
+<li><code>html-webpack-plugin</code>自动生成html</li>
+<li>发布编译环节，运行webpack自动生成<code>dist</code>编译后资源（包括html）</li>
+<li>发布打包环节，将dist中的html单独打包<code>html.zip</code></li>
+<li>发布打包环节，将dist中的静态资源单独打包<code>static.zip</code></li>
+<li>发布打包环节，将服务端代码打包成<code>server.zip</code></li>
+<li>发布部署环节，将<code>html.zip</code>解压缩到nginx静态资源目录，自行配置nginx转发规则</li>
+<li>发布部署环节，将<code>static.zip</code>发布到oss，cdn会自动回源</li>
+<li>发布部署环节，将<code>server.zip</code>进行部署</li>
+</ol>
+<p>step3, step5需要特别关注。</p>
+<h3 id="传统前后端分离（同一仓库）"><a href="#传统前后端分离（同一仓库）" class="headerlink" title="传统前后端分离（同一仓库）"></a>传统前后端分离（同一仓库）</h3><blockquote>
+<p>此模式下，HTML在服务端，服务端与前端代码同一仓库，是否部署cdn无所谓</p>
+</blockquote>
+<ol>
+<li>提前准备好html，并手动维护到服务端view目录下, html中无时间戳</li>
+<li>发布编译环节，运行webpack自动生成<code>dist</code>编译后资源（包括html）</li>
+<li>发布编译环节，根据静态资源与view模板目录关系，自动将dist中的文件时间戳更新到view中的html</li>
+<li>发布打包环节，将dist中的静态资源打包为<code>static.zip</code></li>
+<li>发布打包环节，将服务端代码（含html）打包为<code>server.zip</code></li>
+<li>发布部署环节，将<code>static.zip</code>进行部署</li>
+<li>发布部署环节，将<code>server.zip</code>进行部署</li>
+</ol>
+<p>step3需要特别关注。另外传统开发模式（非前后端分离）下也是此过程。</p>
+<h3 id="传统前后端分离（分开仓库-编译时）"><a href="#传统前后端分离（分开仓库-编译时）" class="headerlink" title="传统前后端分离（分开仓库/编译时）"></a>传统前后端分离（分开仓库/编译时）</h3><blockquote>
+<p>此模式下，HTML在服务端，服务端与前端代码不同仓库，是否部署cdn无所谓</p>
+</blockquote>
+<ol>
+<li>提前准备好html，并手动维护到服务端view目录下, html中无时间戳</li>
+<li>发布编译环节，运行webpack自动生成<code>dist</code>编译后资源（包括html）</li>
+<li>发布编译环节，自动将dist中的文件时间戳存放到<code>timestamp.server</code>中</li>
+<li>发布编译环节，编译后端代码，其中编译html时，从<code>timestamp.server</code>取回最新时间戳，进行编译。</li>
+<li>发布打包环节，将dist中的静态资源打包为<code>static.zip</code></li>
+<li>发布打包环节，将服务端代码（含html）打包为<code>server.zip</code></li>
+<li>发布部署环节，将<code>static.zip</code>进行部署</li>
+<li>发布部署环节，将<code>server.zip</code>进行部署</li>
+</ol>
+<p>step2,3,4需要特被关注，尤其是需要保证编译的顺序</p>
+<h3 id="传统前后端分离（分开仓库-运行时）"><a href="#传统前后端分离（分开仓库-运行时）" class="headerlink" title="传统前后端分离（分开仓库/运行时）"></a>传统前后端分离（分开仓库/运行时）</h3><blockquote>
+<p>此模式下，HTML在服务端，服务端与前端代码不同仓库，是否部署cdn无所谓，运行时方案</p>
+</blockquote>
+<ol>
+<li>提前准备好html，并手动维护到服务端view目录下, html中无时间戳</li>
+<li>发布编译环节，运行webpack自动生成<code>dist</code>编译后资源（包括html）</li>
+<li>发布编译环节，自动将dist中的文件时间戳存放到<code>timestamp.server</code>中</li>
+<li>发布打包环节，将dist中的静态资源打包为<code>static.zip</code></li>
+<li>发布打包环节，将服务端代码（含html）打包为<code>server.zip</code></li>
+<li>发布部署环节，将<code>static.zip</code>进行部署</li>
+<li>发布部署环节，将<code>server.zip</code>进行部署</li>
+<li>运行时，HTML模板宏通过一定机制，实时获取<code>timestamp.server</code>中的最新时间戳，实时编译生成最终html</li>
+</ol>
+<p>step8是关键。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/timestamp/" rel="tag"># timestamp</a>
+          
+            <a href="/tags/编译/" rel="tag"># 编译</a>
+          
+            <a href="/tags/运维/" rel="tag"># 运维</a>
+          
+            <a href="/tags/部署/" rel="tag"># 部署</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/issues-originated-hexo-blog/" rel="next" title="How to eliminate the gap between github issues blog and hexo blog">
+                <i class="fa fa-chevron-left"></i> How to eliminate the gap between github issues blog and hexo blog
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="始信" />
+            
+              <p class="site-author-name" itemprop="name">始信</p>
+              <p class="site-description motion-element" itemprop="description">困苦虐我千百遍，始信</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/johnnychen" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:johnnychq@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/johnnychenq" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/profile.php?id=100011726287177" target="_blank" title="FB Page">
+                    
+                      <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/johnnychq" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/johnnychq" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于时间戳"><span class="nav-number">1.</span> <span class="nav-text">关于时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于HTML及其时间戳"><span class="nav-number">2.</span> <span class="nav-text">关于HTML及其时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影响部署方案的三个方面"><span class="nav-number">3.</span> <span class="nav-text">影响部署方案的三个方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML存储在哪里"><span class="nav-number">3.1.</span> <span class="nav-text">HTML存储在哪里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决过程采用编译时还是运行时"><span class="nav-number">3.2.</span> <span class="nav-text">解决过程采用编译时还是运行时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见开发模式下的HTML及其时间戳部署"><span class="nav-number">4.</span> <span class="nav-text">常见开发模式下的HTML及其时间戳部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#纯粹前后端分离"><span class="nav-number">4.1.</span> <span class="nav-text">纯粹前后端分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（同一仓库）"><span class="nav-number">4.2.</span> <span class="nav-text">传统前后端分离（同一仓库）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（分开仓库-编译时）"><span class="nav-number">4.3.</span> <span class="nav-text">传统前后端分离（分开仓库/编译时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统前后端分离（分开仓库-运行时）"><span class="nav-number">4.4.</span> <span class="nav-text">传统前后端分离（分开仓库/运行时）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">始信</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+
+        function getCommentId(){
+          let path = window.location.pathname;
+          if(path[path.length - 1] === '/'){
+            path =  path.substr(0, path.length -1);
+          }
+          path =  'blog-' + path.split('/').pop();
+          return path;
+        }
+        var gitment = new Gitmint({
+            id: getCommentId(),
+            owner: 'johnnychen',
+            repo: 'blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '72395118edd7c93c165d5c03d206d1d225658e85',
+            
+                client_id: '664c819fea18e0b92824'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
