@@ -1,11 +1,12 @@
 ---
-title: HTML及其时间戳部署
+title: HTML及其静态资源时间戳部署
 date: 2017-12-03T11:32:05Z
-updated: 2017-12-03T11:35:23Z
+updated: 2017-12-10T14:37:04Z
 categories:
-- 前端
+- 总结
 tags:
 - timestamp
+- 前端
 - 编译
 - 运维
 - 部署
