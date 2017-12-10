@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nodejs," />
+  <meta name="keywords" content="nodejs,前后端分离,模板," />
 
 
 
@@ -88,24 +88,18 @@
 
 
 
-<meta name="description" content="node如何断点调试？运行时？多进程时？  https://nodejs.org/api/debugger.html  请先阅读完上述官方调试章节的api文档。文档中主要介绍了两种启用方式  --debug 方式启用调试，命令行 --inspect 方式启用调试，界面化  方式一：debug官方方案方法：node --">
-<meta name="keywords" content="nodejs">
+<meta name="description" content="前后端分离优劣的讨论很多，可以参见知乎Web 前后端分离的意义大吗？  我们今天回顾一下前后端分离的历史，展望下未来的发展  如果没有明确说明，这里的前后端分离指的都是人层面/工种上的前后端分离。  问题起源与两个战场前端工种刚出现时，web研发模式非常老，没有前端模板的概念，html均以后端模板的方式放在服务端(js">
+<meta name="keywords" content="nodejs,前后端分离,模板">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to debug node line by line">
-<meta property="og:url" content="http://johnnychen.cc/blog/2017/debug-nodejs/index.html">
+<meta property="og:title" content="前后端分离的历史和展望">
+<meta property="og:url" content="http://johnnychen.cc/blog/2017/f2e-b2e-border/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="node如何断点调试？运行时？多进程时？  https://nodejs.org/api/debugger.html  请先阅读完上述官方调试章节的api文档。文档中主要介绍了两种启用方式  --debug 方式启用调试，命令行 --inspect 方式启用调试，界面化  方式一：debug官方方案方法：node --debug app.js --debug是node提供的最基本方式，启动后会默认">
+<meta property="og:description" content="前后端分离优劣的讨论很多，可以参见知乎Web 前后端分离的意义大吗？  我们今天回顾一下前后端分离的历史，展望下未来的发展  如果没有明确说明，这里的前后端分离指的都是人层面/工种上的前后端分离。  问题起源与两个战场前端工种刚出现时，web研发模式非常老，没有前端模板的概念，html均以后端模板的方式放在服务端(jsp/php)。 js/css是前端的职责，但是服务端html(模板)是谁的职责却">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23822659/2d9ae982-068c-11e7-9ac5-6bfaa7d3aab2.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23822666/58f71f42-068c-11e7-89d8-8cbbf5f0a071.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23823075/426703d8-0695-11e7-9f94-1dcca56d8caf.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23823065/26d92128-0695-11e7-9a00-02df3967c9fd.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23822717/80ff748e-068d-11e7-868c-473c481a2a6f.png">
-<meta property="og:updated_time" content="2017-11-26T06:36:54.000Z">
+<meta property="og:updated_time" content="2017-12-10T05:58:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="How to debug node line by line">
-<meta name="twitter:description" content="node如何断点调试？运行时？多进程时？  https://nodejs.org/api/debugger.html  请先阅读完上述官方调试章节的api文档。文档中主要介绍了两种启用方式  --debug 方式启用调试，命令行 --inspect 方式启用调试，界面化  方式一：debug官方方案方法：node --debug app.js --debug是node提供的最基本方式，启动后会默认">
-<meta name="twitter:image" content="https://cloud.githubusercontent.com/assets/1297278/23822659/2d9ae982-068c-11e7-9ac5-6bfaa7d3aab2.png">
+<meta name="twitter:title" content="前后端分离的历史和展望">
+<meta name="twitter:description" content="前后端分离优劣的讨论很多，可以参见知乎Web 前后端分离的意义大吗？  我们今天回顾一下前后端分离的历史，展望下未来的发展  如果没有明确说明，这里的前后端分离指的都是人层面/工种上的前后端分离。  问题起源与两个战场前端工种刚出现时，web研发模式非常老，没有前端模板的概念，html均以后端模板的方式放在服务端(jsp/php)。 js/css是前端的职责，但是服务端html(模板)是谁的职责却">
 
 
 
@@ -135,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://johnnychen.cc/blog/2017/debug-nodejs/"/>
+  <link rel="canonical" href="http://johnnychen.cc/blog/2017/f2e-b2e-border/"/>
 
 
 
 
 
-  <title>How to debug node line by line | Johnny's Blog</title>
+  <title>前后端分离的历史和展望 | Johnny's Blog</title>
   
 
 
@@ -288,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://johnnychen.cc/blog/2017/debug-nodejs/">
+    <link itemprop="mainEntityOfPage" href="http://johnnychen.cc/blog/2017/f2e-b2e-border/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="始信">
@@ -305,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">How to debug node line by line</h1>
+          <h1 class="post-title" itemprop="name headline">前后端分离的历史和展望</h1>
         
 
         <div class="post-meta">
@@ -317,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T11:18:12+08:00">
-                2017-11-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T13:58:26+08:00">
+                2017-12-10
               </time>
             
 
@@ -333,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-11-26T14:36:54+08:00">
-                2017-11-26
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-10T13:58:26+08:00">
+                2017-12-10
               </time>
             
           </span>
@@ -352,8 +346,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/总结/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
                   </a>
                 </span>
 
@@ -370,8 +375,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2017/debug-nodejs/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/debug-nodejs/" itemprop="commentsCount"></span>
+                <a href="/blog/2017/f2e-b2e-border/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/f2e-b2e-border/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -399,79 +404,41 @@
       
 
       
-        <p>node如何断点调试？运行时？多进程时？</p>
+        <p>前后端分离优劣的讨论很多，可以参见知乎<a href="https://www.zhihu.com/question/28207685" target="_blank" rel="noopener">Web 前后端分离的意义大吗？</a> </p>
+<p>我们今天回顾一下前后端分离的历史，展望下未来的发展</p>
 <blockquote>
-<p><a href="https://nodejs.org/api/debugger.html" target="_blank" rel="noopener">https://nodejs.org/api/debugger.html</a></p>
+<p>如果没有明确说明，这里的前后端分离指的都是人层面/工种上的前后端分离。</p>
 </blockquote>
-<p>请先阅读完上述官方调试章节的api文档。文档中主要介绍了两种启用方式</p>
+<h2 id="问题起源与两个战场"><a href="#问题起源与两个战场" class="headerlink" title="问题起源与两个战场"></a>问题起源与两个战场</h2><p>前端工种刚出现时，<code>web研发模式</code>非常老，没有前端模板的概念，html均以后端模板的方式放在服务端(jsp/php)。</p>
+<p>js/css是前端的职责，但是服务端html(模板)是谁的职责却一直剪不断理还乱，不同的公司，不同的团队表现不一。html(模板)直接影响页面展现，所以认为是前端的范畴；但在源码管理和部署层面，又存在与服务端，且有一定的业务逻辑耦合，所以说是后端的范畴也不为过。</p>
+<p>随着<code>web研发模式</code>的发展，前端模板的使用越来越广泛，尤其到mvvm时代，后端模板几近消亡，在技术上为前后端分离提供了基础。前后端分离的概念也就雨后春笋的冒出来了，基本上狭义的前后端分离可以理解为后端模板的消亡史。</p>
+<p>上述前后端分离是主战场，主要技术推动，是最广为熟知和认可的前后端分离。除此之外，还有一个分战场，基于nodejs的前后端分离，推动的因素主要是前端整体能力的提升、个人空间的发展、对业务理解和话语权的把握上。</p>
+<p>两个战场合在一起，构成了完整前后端分离的概念。在这个概念下，都需要前端研发人员和后端研发人员才能共同支持业务的研发诉求。</p>
+<h2 id="服务端模板时代"><a href="#服务端模板时代" class="headerlink" title="服务端模板时代"></a>服务端模板时代</h2><p>非前后端分离的时代，等同于服务端模板的时代。服务端模板因为耦合了展现逻辑和业务逻辑，导致无法明确职责，非常影响项目协同。很少团队明确约定，后端模板应该属于前端团队负责还是后端团队负责，具体项目协作中，这部分工作的划分也基本变成了一个艺术性的工作，非常考验项目经理的把控能力。</p>
+<p>带来两个非常大的缺点,  因为前后端两拨人在同一载体上分别维护业务逻辑和展现逻辑，导致模板这一载体本身的逻辑说不清楚，时间久了，业务复杂了，维护性非常差。另外一个缺点是 ，职责不清导致的协同成本高昂，甚至出现踢皮球现象。</p>
+<p>针对上述问题，后端的态度主要是甩锅，想避而不谈，很少提出解决方案；前端因为职业空间的缘故，毅然肩负起解决这个问题的责任。解决的思路分两派，一派是服务端模板客户端化，另外一派寻求服务端的解决方案。</p>
+<p>关于服务端的解决方案，分为改良派和改革派，最后改革派存活下来了。改良派虽然失败了，但历史上的贡献不应该被抹去，简单分享下。</p>
+<p>服务端的改良方案指在是在现有技术体系不变下，引入服务端mock/api层，使得前后端同学可以分别独立开发，其中服务端模板职责明确为前端所有。</p>
+<p>改良派失败的原因是方案过于复杂，因为mock/api层需要完整模拟所有服务端模板的逻辑，而且这个过程与特别服务端语言/模板引擎耦合，很难推广和产品化；另外 ，前端开发时需要单独运行mock服务器；最后，腹背受敌，在纯粹的客户端分离和基于nodejs的前后端分离的夹击下，生存空间有限。</p>
+<h2 id="主战场-基于浏览器端的前后端分离"><a href="#主战场-基于浏览器端的前后端分离" class="headerlink" title="主战场 - 基于浏览器端的前后端分离"></a>主战场 - 基于浏览器端的前后端分离</h2><p>客户端模板化技术是随着RIA富Web应用的发展而发展，起初仅仅是局部采用客户端模板，后来整个页面都采用，最后把页面路由也搬到了客户端。整个网站变成了一个SPA单页面应用，展现逻辑写死在前端模板中，通过Restful接口获取业务数据实现业务逻辑的处理。</p>
+<p>目前主流的React, Vue, Angular前端web框架均提供标准的SPA解决方案，MVVM成为标准的框架设计模式。</p>
+<p>不过，SPA依旧依赖一个html容器，此容器必须存放在应用服务器端，不能像js/css/img一样托管在静态资源服务器/cdn上，原因主要是域名及访问路径问题，数据跨域访问也有影响。</p>
+<p>关于html容器依赖问题，如果不解决，即把html作为空白模板放在服务端，我们称为<code>传统的前后端分离</code>；如果解决的话，把html也作为静态资源放在前端工程中，我们称为<code>纯粹的前后端分离</code>。</p>
+<p>纯粹的前后端分离，可以让前端完全不依赖后端环境进行研发。但在部署的时候，需要将html与其他js/css/img资源分开打包部署，html部署在nginx中并做相应配置，js/css/img托管在静态资源服务器/cdn中。</p>
+<p>另外，为了解决纯粹前后端分离SEO不友好的问题，践行了服务端同构渲染方案，这里就不赘述了。</p>
+<h2 id="分战场-基于nodejs的前后端分离"><a href="#分战场-基于nodejs的前后端分离" class="headerlink" title="分战场 - 基于nodejs的前后端分离"></a>分战场 - 基于nodejs的前后端分离</h2><p>基于nodejs的前后端分离，除了nodejs本身技术的成熟外，建立在几个背景下：</p>
 <ul>
-<li><code>--debug</code> 方式启用调试，命令行</li>
-<li><code>--inspect</code> 方式启用调试，界面化</li>
+<li>服务端本身service化</li>
+<li>后端不愿意承担模板的工作，想丢给前端</li>
+<li>前端愿意承担更多工作，除了服务端模板外 ，整个web层有意愿也有能力承接</li>
 </ul>
-<h2 id="方式一：debug"><a href="#方式一：debug" class="headerlink" title="方式一：debug"></a>方式一：debug</h2><h4 id="官方方案"><a href="#官方方案" class="headerlink" title="官方方案"></a>官方方案</h4><p>方法：<code>node --debug app.js</code></p>
-<p><code>--debug</code>是node提供的最基本方式，启动后会默认开启<code>5858</code>端口，然后就可以侦听该端口进行调试了。尝试访问下5858提供的侦听端口服务把：<a href="http://localhost:5858" target="_blank" rel="noopener">http://localhost:5858</a></p>
-<p>之后，侦听该端口，进行调试，方式及工具很多，官方只提供了命令行方式，</p>
-<ul>
-<li><code>node debug -p &lt;pid&gt;</code> 或</li>
-<li><code>node debug &lt;URI&gt;</code></li>
-</ul>
-<p>备注：</p>
-<blockquote>
-<p>node debug index.js 其实是两条命令的缩写</p>
-<ul>
-<li>node –debug app.js // 假设其pid为10010</li>
-<li>node debug -p 10010</li>
-</ul>
-</blockquote>
-<p>这里不细讲，重点讲基于该端口的社区方案：</p>
-<h3 id="社区扩展"><a href="#社区扩展" class="headerlink" title="社区扩展"></a>社区扩展</h3><p>社区提供了很多其他选择，列下比较知名的两个：</p>
-<ul>
-<li><a href="https://github.com/node-inspector/node-inspector" target="_blank" rel="noopener">node-inspector</a></li>
-<li><a href="http://s-a.github.io/iron-node/" target="_blank" rel="noopener">iron-node</a></li>
-</ul>
-<p>这里重点介绍下<code>node-inspector</code></p>
-<p>安装很简单：<code>npm install -g node-inspector</code></p>
-<p>使用也非常简单：<code>node-debug app.js</code></p>
-<p>但，<code>node-debug app.js</code>其实包含了三个过程</p>
-<ol>
-<li><code>node-inspector</code> 启动8080web服务，访问后是一个CHROME_DEV_TOOLS界面</li>
-<li><code>node --debug app.js</code>这个是最基本、核心的，启用node的<code>--debug</code>模式，暴露默认5858端口。</li>
-<li>访问<code>http://127.0.0.1:8080/?port=5858</code>即可进行调试，node-inspector会通过socket与5858建立长连接，进行调试。</li>
-</ol>
-<p>总结一下前两者：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822659/2d9ae982-068c-11e7-9ac5-6bfaa7d3aab2.png" alt="image"></p>
-<h2 id="方式二：inspect"><a href="#方式二：inspect" class="headerlink" title="方式二：inspect"></a>方式二：inspect</h2><p>方法：<code>node --inspect app.js</code></p>
-<p>其实是把社区的方案直接内置到nodejs中了，不需要安装<code>node-inspector</code>即可以直接用Chrome DevTools进行可视化界面调试。</p>
-<p>此方案直到nodejs v6.3才被node内部支持，具体纳入过程可以参见：<a href="https://nodesource.com/blog/the-10-key-features-in-node-js-v6-lts-boron-after-you-upgrade" target="_blank" rel="noopener">https://nodesource.com/blog/the-10-key-features-in-node-js-v6-lts-boron-after-you-upgrade</a></p>
-<p>纳入后的调用及部署变得简单，对比如下：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822666/58f71f42-068c-11e7-89d8-8cbbf5f0a071.png" alt="image"></p>
-<h2 id="通过IDE进行debug"><a href="#通过IDE进行debug" class="headerlink" title="通过IDE进行debug"></a>通过IDE进行debug</h2><p>debug原理就是上述两种，一些IDE如Webstorm的内置的debug调试也是基于上述原理，采用<code>方式一</code>进行, 只要配置好<code>启动/入口JS</code>文件即可：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23823075/426703d8-0695-11e7-9f94-1dcca56d8caf.png" alt="image"></p>
-<p>Webstorm有两个button, 分别为启动和调试</p>
-<ul>
-<li>启动：用配置的 node <code>启动/入口JS</code></li>
-<li>调试：额外加上调试参数 node <code>启动/入口JS</code> <code>--debug-brk=55077</code> <code>--expose_debug_as=v8debug</code></li>
-</ul>
-<p>由于IDE的高度集成，使得调试体验非常好：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23823065/26d92128-0695-11e7-9a00-02df3967c9fd.png" alt="image"></p>
-<h2 id="关于运行时调试"><a href="#关于运行时调试" class="headerlink" title="关于运行时调试"></a>关于运行时调试</h2><p>已经启动的服务器不想停掉，有办法进行调试吗？</p>
-<ul>
-<li><code>--debug</code>方式有, 对具体node进程传入<code>USR1</code>信号即可： <code>kill -s USR1 &lt;pid&gt;</code></li>
-<li><code>--inspect</code>方式缺乏，有望在node v8.0提供，参见：<a href="https://github.com/nodejs/node/issues/8464" target="_blank" rel="noopener">Debug already running process using v8-inspector?</a></li>
-</ul>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822717/80ff748e-068d-11e7-868c-473c481a2a6f.png" alt="image"></p>
-<h2 id="关于多进程"><a href="#关于多进程" class="headerlink" title="关于多进程"></a>关于多进程</h2><p><code>--inspect</code>方式不会有问题（缺点不提了），因为会对每个进程单独开启一个debug链接，但传统<code>--debug</code>就麻烦了。</p>
-<hr>
-<p>只有一条：请尽可能降维为单进程后再调试。当然，多进程Debug是有方法的，只不过比较麻烦，可以参见：</p>
-<blockquote>
-<p><a href="https://strongloop.com/strongblog/whats-new-nodejs-v0-12-debugging-clusters/" target="_blank" rel="noopener">https://strongloop.com/strongblog/whats-new-nodejs-v0-12-debugging-clusters/</a></p>
-</blockquote>
-<p>另外，针对eggjs，如何进行调试呢？因为即使开发模式，egg也会启动主进程、worker进程及agent 3个进程。比较简单，找出woker进程的pid，运行时设置为<code>--debug</code>模式。其他多进程也可以按照这种方式手动设置后debug。</p>
-<blockquote>
-<p>ps -ef | grep app_worker.js // 找到pid<br>kill -s USR1 [pid]</p>
-</blockquote>
-<p>然后便可以开启<code>node-inspector</code>，在浏览器中Debug了。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>界面化调试偶尔用用即可，不要过于依赖，养成打印日志，通过日志定位、排查问题才是王道。</p>
+<p>基于nodejs的前后端分离显然解决了服务端模板职责不清以及带来的相关问题，但同时走向了另外一个极端，把服务端路由、认证、权限、数据拼装和转换等web层的一系列工作都纳入到前端的范畴内。</p>
+<p>但从技术架构来看，nodejs的引入不破坏后端本身技术架构体系，同时解决了服务端模板职责的问题，另外将web层统一交给前端，在多端复用、性能优化等场景也有了更大的发挥空间。但有个很大的非技术缺陷是，在时代背景下面，前端资源严重不足，将web层交给前端或许在项目协同及开发效率是有提升，但资源不足的先天劣势是很残酷的现实。另外，nodejs在技术上属于后端开发的范畴，对应的研发体系和配套措施成本也是需要考虑的。</p>
+<h2 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h2><p>前后端分离是具有中国特色和时代背景的，国外不存在所谓的前后端分离，国内的前后端分离更多的是时代背景下的产物。在中国互联网高速发展，对研发人员的大量需求与供给之间严重不足之间的矛盾背景下，只能通过降低对研发人员的要求，通过组织、协作、分工的手段来解决高水平研发人力资源不足问题。</p>
+<p>随着程序员群体的成长，高水平人才的不断涌入，以及技术本身的发展及门槛的降低，web研发将会回到面向业务思考的全栈研发模式上，前后端分离的概念将会消亡，如果 有，也只会存在与特定场景。</p>
+<p>基于人的/协作的前后端分离将会消亡，但基于技术的前后端分离将会永存。采用了nodejs的研发团队, html模板同样会放在浏览器端。技术的前后端分离是软件工程中分层思想的体现，不会因为人的缘故产生异同。</p>
+<p>未来后端开发必定会有nodejs的一片战场，因为同种语言，相同模块管理，相似工程化手段的天然优势是其他语言难以望其项背的，而且这个战场不是在企业级应用，而是在消费者场景，快速迭代，快速试错，快速拿结果的场景。另外，企业级应用场景中的后端不能继续想着有前端帮你写页面，双方定义前后端接口了，学会运用企业级应用的前端解决方案，自己构建页面，快速响应业务才是核心。</p>
+<p>最后，大浪淘沙后，时代背景的，人为的终将被淘汰；符合软件工程思想的，面向业务架构的终将留存。</p>
 
       
     </div>
@@ -491,6 +458,10 @@
           
             <a href="/tags/nodejs/" rel="tag"># nodejs</a>
           
+            <a href="/tags/前后端分离/" rel="tag"># 前后端分离</a>
+          
+            <a href="/tags/模板/" rel="tag"># 模板</a>
+          
         </div>
       
 
@@ -502,15 +473,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/blog/2017/html-and-its-timesamp/" rel="next" title="HTML及其时间戳部署">
+                <i class="fa fa-chevron-left"></i> HTML及其时间戳部署
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2017/issues-originated-hexo-blog/" rel="prev" title="How to eliminate the gap between github issues blog and hexo blog">
-                How to eliminate the gap between github issues blog and hexo blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -700,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方式一：debug"><span class="nav-number">1.</span> <span class="nav-text">方式一：debug</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#官方方案"><span class="nav-number">1.0.1.</span> <span class="nav-text">官方方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社区扩展"><span class="nav-number">1.1.</span> <span class="nav-text">社区扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方式二：inspect"><span class="nav-number">2.</span> <span class="nav-text">方式二：inspect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过IDE进行debug"><span class="nav-number">3.</span> <span class="nav-text">通过IDE进行debug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于运行时调试"><span class="nav-number">4.</span> <span class="nav-text">关于运行时调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于多进程"><span class="nav-number">5.</span> <span class="nav-text">关于多进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题起源与两个战场"><span class="nav-number">1.</span> <span class="nav-text">问题起源与两个战场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端模板时代"><span class="nav-number">2.</span> <span class="nav-text">服务端模板时代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主战场-基于浏览器端的前后端分离"><span class="nav-number">3.</span> <span class="nav-text">主战场 - 基于浏览器端的前后端分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分战场-基于nodejs的前后端分离"><span class="nav-number">4.</span> <span class="nav-text">分战场 - 基于nodejs的前后端分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未来展望"><span class="nav-number">5.</span> <span class="nav-text">未来展望</span></a></li></ol></div>
             
 
           </div>
