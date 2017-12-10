@@ -1,7 +1,7 @@
 ---
-title: How to debug node line by line
+title: nodejs中的调试
 date: 2017-11-26T11:18:12Z
-updated: 2017-12-10T14:31:00Z
+updated: 2017-12-10T14:33:03Z
 categories:
 - tools
 tags:
