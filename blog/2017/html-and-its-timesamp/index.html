@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="timestamp,编译,运维,部署," />
+  <meta name="keywords" content="timestamp,编译,运维,部署,前端," />
 
 
 
@@ -89,16 +89,16 @@
 
 
 <meta name="description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn">
-<meta name="keywords" content="timestamp,编译,运维,部署">
+<meta name="keywords" content="timestamp,编译,运维,部署,前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTML及其时间戳部署">
+<meta property="og:title" content="HTML及其静态资源时间戳部署">
 <meta property="og:url" content="http://johnnychen.cc/blog/2017/html-and-its-timesamp/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
 <meta property="og:description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn情况下覆盖式发布和非覆盖式发布 不过，答案中未对时间戳如何更新到HTML中作详">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-03T03:35:23.000Z">
+<meta property="og:updated_time" content="2017-12-10T06:37:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTML及其时间戳部署">
+<meta name="twitter:title" content="HTML及其静态资源时间戳部署">
 <meta name="twitter:description" content="本文针对的阅读对象是想系统了解时间戳机制，对应部署机制，尤其是与HTML结合部分的同学，需要对前端运维有一定了解。  关于时间戳关于前端资源时间戳问题，知乎上有个经典的回答 大公司里怎样开发和部署前端代码，详细讲述了，时间戳问题的起因以及对应2种解决方案：  手动维护时间戳 信息摘要时间戳  以及在静态资源部署在cdn情况下覆盖式发布和非覆盖式发布 不过，答案中未对时间戳如何更新到HTML中作详">
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <title>HTML及其时间戳部署 | Johnny's Blog</title>
+  <title>HTML及其静态资源时间戳部署 | Johnny's Blog</title>
   
 
 
@@ -299,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HTML及其时间戳部署</h1>
+          <h1 class="post-title" itemprop="name headline">HTML及其静态资源时间戳部署</h1>
         
 
         <div class="post-meta">
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T11:35:23+08:00">
-                2017-12-03
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-10T14:37:04+08:00">
+                2017-12-10
               </time>
             
           </span>
@@ -346,8 +346,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/总结/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
                   </a>
                 </span>
 
@@ -517,6 +517,8 @@
           
             <a href="/tags/部署/" rel="tag"># 部署</a>
           
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
         </div>
       
 
@@ -639,7 +641,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -650,7 +652,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
