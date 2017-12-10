@@ -1,7 +1,7 @@
 ---
-title: 前后端分离的历史和展望
+title: 前后端分离的概念和展望
 date: 2017-12-10T13:58:26Z
-updated: 2017-12-10T14:36:12Z
+updated: 2017-12-10T14:42:39Z
 categories:
 - 总结
 tags:
