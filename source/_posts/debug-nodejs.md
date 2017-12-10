@@ -1,7 +1,7 @@
 ---
 title: How to debug node line by line
 date: 2017-11-26T11:18:12Z
-updated: 2017-11-26T14:36:54Z
+updated: 2017-12-10T14:31:00Z
 categories:
 - tools
 tags:
@@ -12,13 +12,17 @@ node如何断点调试？运行时？多进程时？
 
 > https://nodejs.org/api/debugger.html
 
-请先阅读完上述官方调试章节的api文档。文档中主要介绍了两种启用方式
+请先阅读完上述官方关于debug的文档。
 
-* `--debug` 方式启用调试，命令行
+## 官方的两种方式 
+
+官方文档中主要介绍了两种启用方式
+
+* `--debug` 方式启用调试，命令行（已经废弃）
 * `--inspect` 方式启用调试，界面化
 
 
-## 方式一：debug
+### 方式一：`--debug`
 
 
 #### 官方方案
@@ -42,7 +46,7 @@ node如何断点调试？运行时？多进程时？
 
 这里不细讲，重点讲基于该端口的社区方案：
 
-### 社区扩展
+#### 社区扩展
 
 社区提供了很多其他选择，列下比较知名的两个：
 
@@ -68,7 +72,7 @@ node如何断点调试？运行时？多进程时？
 
 
 
-## 方式二：inspect
+### 方式二：`--inspect`
 
 
 方法：`node --inspect app.js`
@@ -83,9 +87,13 @@ node如何断点调试？运行时？多进程时？
 ![image](https://cloud.githubusercontent.com/assets/1297278/23822666/58f71f42-068c-11e7-89d8-8cbbf5f0a071.png)
 
 
-## 通过IDE进行debug
+## IDE中如何debug
 
-debug原理就是上述两种，一些IDE如Webstorm的内置的debug调试也是基于上述原理，采用`方式一`进行, 只要配置好`启动/入口JS`文件即可：
+Debug原理就是上述两种方式，IDE中的内置debug也遵从
+
+### WebStorm
+
+采用`方式一`进行, 只要配置好`启动/入口JS`文件即可：
 
 ![image](https://cloud.githubusercontent.com/assets/1297278/23823075/426703d8-0695-11e7-9f94-1dcca56d8caf.png)
 
@@ -98,7 +106,13 @@ Webstorm有两个button, 分别为启动和调试
 
 ![image](https://cloud.githubusercontent.com/assets/1297278/23823065/26d92128-0695-11e7-9a00-02df3967c9fd.png)
 
+### VisualStudioCode
 
+![image](https://user-images.githubusercontent.com/1297278/33805811-9b0c19f6-ddf9-11e7-83e1-7d87232eac11.png)
+
+![image](https://user-images.githubusercontent.com/1297278/33805819-a90dd724-ddf9-11e7-94f3-bea572f2997b.png)
+
+由于VS运行node环境为v8.9, 所以直接启用方式二进行debug: `node --inspect-brk=25696 test.js`
 
 ## 关于运行时调试
 
