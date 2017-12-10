@@ -4,20 +4,18 @@
 
     
   <url>
-    <loc>http://johnnychen.cc//blog/2017/html-and-its-timesamp/</loc>
-    <lastmod>2017-12-10T06:37:04.000Z</lastmod>
+    <loc>http://johnnychen.cc//blog/2017/f2e-b2e-border/</loc>
+    <lastmod>2017-12-10T06:42:39.000Z</lastmod>
     <data>
         <display>
-        <title>HTML及其静态资源时间戳部署</title>
-        <pubTime>2017-12-03T03:32:05.000Z</pubTime>
+        <title>前后端分离的概念和展望</title>
+        <pubTime>2017-12-10T05:58:26.000Z</pubTime>
         
-        <tag>timestamp</tag>
+        <tag>nodejs</tag>
          
-        <tag>编译</tag>
+        <tag>前后端分离</tag>
          
-        <tag>运维</tag>
-         
-        <tag>部署</tag>
+        <tag>模板</tag>
          
         <tag>前端</tag>
          
@@ -32,18 +30,20 @@
 
     
   <url>
-    <loc>http://johnnychen.cc//blog/2017/f2e-b2e-border/</loc>
-    <lastmod>2017-12-10T06:36:12.000Z</lastmod>
+    <loc>http://johnnychen.cc//blog/2017/html-and-its-timesamp/</loc>
+    <lastmod>2017-12-10T06:37:04.000Z</lastmod>
     <data>
         <display>
-        <title>前后端分离的历史和展望</title>
-        <pubTime>2017-12-10T05:58:26.000Z</pubTime>
+        <title>HTML及其静态资源时间戳部署</title>
+        <pubTime>2017-12-03T03:32:05.000Z</pubTime>
         
-        <tag>nodejs</tag>
+        <tag>timestamp</tag>
          
-        <tag>前后端分离</tag>
+        <tag>编译</tag>
          
-        <tag>模板</tag>
+        <tag>运维</tag>
+         
+        <tag>部署</tag>
          
         <tag>前端</tag>
          
