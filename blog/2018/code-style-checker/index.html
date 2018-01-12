@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nodejs," />
+  <meta name="keywords" content="codestyle,eslint,hooks," />
 
 
 
@@ -88,26 +88,23 @@
 
 
 
-<meta name="description" content="node如何断点调试？运行时？多进程时？  https://nodejs.org/api/debugger.html  请先阅读完上述官方关于debug的文档。 官方的两种方式官方文档中主要介绍了两种启用方式  --debug 方式启用调试，命令行（已经废弃） --inspect 方式启用调试，界面化  方式一：--d">
-<meta name="keywords" content="nodejs">
+<meta name="description" content="既然是代码风格检查套路，那就是不局限与语言；哪种语言，都类似，照葫芦画瓢即可。为了表述方便，并顾及一些具体细节，我们以javascript作为例子。 代码风格检查的工程化套路，我们希望达到的目的：  在尽可能多的研发生命周期环节上去触及这一问题，多管齐下，最终解决代码风格的问题 保证上述多环节执行的代码风格规则的一致性">
+<meta name="keywords" content="codestyle,eslint,hooks">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodejs中的调试">
-<meta property="og:url" content="http://johnnychen.cc/blog/2017/debug-nodejs/index.html">
+<meta property="og:title" content="代码风格检查的工程化套路">
+<meta property="og:url" content="http://johnnychen.cc/blog/2018/code-style-checker/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="node如何断点调试？运行时？多进程时？  https://nodejs.org/api/debugger.html  请先阅读完上述官方关于debug的文档。 官方的两种方式官方文档中主要介绍了两种启用方式  --debug 方式启用调试，命令行（已经废弃） --inspect 方式启用调试，界面化  方式一：--debug官方方案方法：node --debug app.js --debug是n">
+<meta property="og:description" content="既然是代码风格检查套路，那就是不局限与语言；哪种语言，都类似，照葫芦画瓢即可。为了表述方便，并顾及一些具体细节，我们以javascript作为例子。 代码风格检查的工程化套路，我们希望达到的目的：  在尽可能多的研发生命周期环节上去触及这一问题，多管齐下，最终解决代码风格的问题 保证上述多环节执行的代码风格规则的一致性  关于代码风格代码风格有时过于笼统，实际上可以进一步分为两个层面  文本格式检">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23822659/2d9ae982-068c-11e7-9ac5-6bfaa7d3aab2.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23822666/58f71f42-068c-11e7-89d8-8cbbf5f0a071.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23823075/426703d8-0695-11e7-9f94-1dcca56d8caf.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23823065/26d92128-0695-11e7-9a00-02df3967c9fd.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/1297278/33805811-9b0c19f6-ddf9-11e7-83e1-7d87232eac11.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/1297278/33805819-a90dd724-ddf9-11e7-94f3-bea572f2997b.png">
-<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1297278/23822717/80ff748e-068d-11e7-868c-473c481a2a6f.png">
-<meta property="og:updated_time" content="2017-12-10T06:33:03.000Z">
+<meta property="og:image" content="https://user-images.githubusercontent.com/1297278/34852062-ccfad8bc-f767-11e7-95c2-fbea52042089.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/1297278/34852146-28dca660-f768-11e7-9cb7-8df033d8d1c4.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/1297278/34853614-a938e722-f76f-11e7-946b-20cf8a09cd09.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/1297278/34854034-2474726a-f772-11e7-91e4-551b61f484dc.png">
+<meta property="og:updated_time" content="2018-01-11T16:25:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodejs中的调试">
-<meta name="twitter:description" content="node如何断点调试？运行时？多进程时？  https://nodejs.org/api/debugger.html  请先阅读完上述官方关于debug的文档。 官方的两种方式官方文档中主要介绍了两种启用方式  --debug 方式启用调试，命令行（已经废弃） --inspect 方式启用调试，界面化  方式一：--debug官方方案方法：node --debug app.js --debug是n">
-<meta name="twitter:image" content="https://cloud.githubusercontent.com/assets/1297278/23822659/2d9ae982-068c-11e7-9ac5-6bfaa7d3aab2.png">
+<meta name="twitter:title" content="代码风格检查的工程化套路">
+<meta name="twitter:description" content="既然是代码风格检查套路，那就是不局限与语言；哪种语言，都类似，照葫芦画瓢即可。为了表述方便，并顾及一些具体细节，我们以javascript作为例子。 代码风格检查的工程化套路，我们希望达到的目的：  在尽可能多的研发生命周期环节上去触及这一问题，多管齐下，最终解决代码风格的问题 保证上述多环节执行的代码风格规则的一致性  关于代码风格代码风格有时过于笼统，实际上可以进一步分为两个层面  文本格式检">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/1297278/34852062-ccfad8bc-f767-11e7-95c2-fbea52042089.png">
 
 
 
@@ -137,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://johnnychen.cc/blog/2017/debug-nodejs/"/>
+  <link rel="canonical" href="http://johnnychen.cc/blog/2018/code-style-checker/"/>
 
 
 
 
 
-  <title>nodejs中的调试 | Johnny's Blog</title>
+  <title>代码风格检查的工程化套路 | Johnny's Blog</title>
   
 
 
@@ -290,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://johnnychen.cc/blog/2017/debug-nodejs/">
+    <link itemprop="mainEntityOfPage" href="http://johnnychen.cc/blog/2018/code-style-checker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="始信">
@@ -307,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nodejs中的调试</h1>
+          <h1 class="post-title" itemprop="name headline">代码风格检查的工程化套路</h1>
         
 
         <div class="post-meta">
@@ -319,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T11:18:12+08:00">
-                2017-11-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-10T01:05:24+08:00">
+                2018-01-10
               </time>
             
 
@@ -335,34 +332,12 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-10T14:33:03+08:00">
-                2017-12-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-12T00:25:31+08:00">
+                2018-01-12
               </time>
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -372,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2017/debug-nodejs/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/debug-nodejs/" itemprop="commentsCount"></span>
+                <a href="/blog/2018/code-style-checker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/code-style-checker/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -401,84 +376,56 @@
       
 
       
-        <p>node如何断点调试？运行时？多进程时？</p>
-<blockquote>
-<p><a href="https://nodejs.org/api/debugger.html" target="_blank" rel="noopener">https://nodejs.org/api/debugger.html</a></p>
-</blockquote>
-<p>请先阅读完上述官方关于debug的文档。</p>
-<h2 id="官方的两种方式"><a href="#官方的两种方式" class="headerlink" title="官方的两种方式"></a>官方的两种方式</h2><p>官方文档中主要介绍了两种启用方式</p>
+        <p>既然是代码风格检查套路，那就是不局限与语言；哪种语言，都类似，照葫芦画瓢即可。为了表述方便，并顾及一些具体细节，我们以<code>javascript</code>作为例子。</p>
+<p>代码风格检查的工程化套路，我们希望达到的目的：</p>
 <ul>
-<li><code>--debug</code> 方式启用调试，命令行（已经废弃）</li>
-<li><code>--inspect</code> 方式启用调试，界面化</li>
+<li>在尽可能多的研发生命周期环节上去触及这一问题，多管齐下，最终解决代码风格的问题</li>
+<li>保证上述多环节执行的<code>代码风格规则</code>的一致性</li>
 </ul>
-<h3 id="方式一：-debug"><a href="#方式一：-debug" class="headerlink" title="方式一：--debug"></a>方式一：<code>--debug</code></h3><h4 id="官方方案"><a href="#官方方案" class="headerlink" title="官方方案"></a>官方方案</h4><p>方法：<code>node --debug app.js</code></p>
-<p><code>--debug</code>是node提供的最基本方式，启动后会默认开启<code>5858</code>端口，然后就可以侦听该端口进行调试了。尝试访问下5858提供的侦听端口服务把：<a href="http://localhost:5858" target="_blank" rel="noopener">http://localhost:5858</a></p>
-<p>之后，侦听该端口，进行调试，方式及工具很多，官方只提供了命令行方式，</p>
+<h2 id="关于代码风格"><a href="#关于代码风格" class="headerlink" title="关于代码风格"></a>关于代码风格</h2><p>代码风格有时过于笼统，实际上可以进一步分为两个层面</p>
 <ul>
-<li><code>node debug -p &lt;pid&gt;</code> 或</li>
-<li><code>node debug &lt;URI&gt;</code></li>
+<li>文本格式检查</li>
+<li>代码语法检查<ul>
+<li>语法偏好检查</li>
+<li>语法警告检查</li>
+<li>语法错误检查</li>
 </ul>
-<p>备注：</p>
-<blockquote>
-<p>node debug index.js 其实是两条命令的缩写</p>
-<ul>
-<li>node –debug app.js // 假设其pid为10010</li>
-<li>node debug -p 10010</li>
+</li>
 </ul>
-</blockquote>
-<p>这里不细讲，重点讲基于该端口的社区方案：</p>
-<h4 id="社区扩展"><a href="#社区扩展" class="headerlink" title="社区扩展"></a>社区扩展</h4><p>社区提供了很多其他选择，列下比较知名的两个：</p>
-<ul>
-<li><a href="https://github.com/node-inspector/node-inspector" target="_blank" rel="noopener">node-inspector</a></li>
-<li><a href="http://s-a.github.io/iron-node/" target="_blank" rel="noopener">iron-node</a></li>
-</ul>
-<p>这里重点介绍下<code>node-inspector</code></p>
-<p>安装很简单：<code>npm install -g node-inspector</code></p>
-<p>使用也非常简单：<code>node-debug app.js</code></p>
-<p>但，<code>node-debug app.js</code>其实包含了三个过程</p>
+<p>因为代码隶属文本，所以文本格式本身应该隶属代码风格的一部分，且是基础，不需要言明的部分，关于文本格式检查的规范很标准，统一采用<code>.editorconfig</code>配置即可。</p>
+<p>在代码语法层面上，是有<code>偏好</code>、<code>警告</code>和<code>错误</code>之分的，偏好指的是喜好，比如<code>=</code>前后是否有空格，不影响程序的运行；<code>警告</code>不是偏好，看到警告需要警醒，很可能程序存在问题，或者自己逻辑不清，比如变量定义却没有使用；<code>错误</code>就不用说了，代码执行到这一行必定报错，比如重复<code>let</code>变量。</p>
+<p>代码语法层面，主要通过AWT抽象语法书分析后给出结果；在工具使用上，一般也不会区分<code>偏好</code>,<code>警告</code>,<code>错误</code>，但我们心里还是要了解区别的，主要通过<code>.eslintconfig</code>来统一声明语法规则 。</p>
+<h2 id="从研发生命周期看代码风格检查"><a href="#从研发生命周期看代码风格检查" class="headerlink" title="从研发生命周期看代码风格检查"></a>从研发生命周期看代码风格检查</h2><p>从开发到发布，代码风格检查主要作用在如下五个环节</p>
 <ol>
-<li><code>node-inspector</code> 启动8080web服务，访问后是一个CHROME_DEV_TOOLS界面</li>
-<li><code>node --debug app.js</code>这个是最基本、核心的，启用node的<code>--debug</code>模式，暴露默认5858端口。</li>
-<li>访问<code>http://127.0.0.1:8080/?port=5858</code>即可进行调试，node-inspector会通过socket与5858建立长连接，进行调试。</li>
+<li>开发IDE环节：在文字编码的过程中 ，通过IDE及其插件实现</li>
+<li>开发编译环节：比如webpack编译时，进行语法检测报警或报错，报错时直接编译失败</li>
+<li>git提交本地钩子：<code>pre-commit</code>等工具会在你本地.git仓库中安装钩子，提交代码时，自动触发脚本检查，报警或报错，报错时直接组织提交</li>
+<li>git提交服务端钩子: 在服务端.git仓库中安装钩子，效果与本地钩子类似，不过因为部署在服务端，因此可以全局控制，更加严格</li>
+<li>CI/CD环节：在<code>jenkins</code>, <code>travis</code>中触发代码风格检查，如果失败则警告或中断CI/CD</li>
 </ol>
-<p>总结一下前两者：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822659/2d9ae982-068c-11e7-9ac5-6bfaa7d3aab2.png" alt="image"></p>
-<h3 id="方式二：-inspect"><a href="#方式二：-inspect" class="headerlink" title="方式二：--inspect"></a>方式二：<code>--inspect</code></h3><p>方法：<code>node --inspect app.js</code></p>
-<p>其实是把社区的方案直接内置到nodejs中了，不需要安装<code>node-inspector</code>即可以直接用Chrome DevTools进行可视化界面调试。</p>
-<p>此方案直到nodejs v6.3才被node内部支持，具体纳入过程可以参见：<a href="https://nodesource.com/blog/the-10-key-features-in-node-js-v6-lts-boron-after-you-upgrade" target="_blank" rel="noopener">https://nodesource.com/blog/the-10-key-features-in-node-js-v6-lts-boron-after-you-upgrade</a></p>
-<p>纳入后的调用及部署变得简单，对比如下：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822666/58f71f42-068c-11e7-89d8-8cbbf5f0a071.png" alt="image"></p>
-<h2 id="IDE中如何debug"><a href="#IDE中如何debug" class="headerlink" title="IDE中如何debug"></a>IDE中如何debug</h2><p>Debug原理就是上述两种方式，IDE中的内置debug也遵从</p>
-<h3 id="WebStorm"><a href="#WebStorm" class="headerlink" title="WebStorm"></a>WebStorm</h3><p>采用<code>方式一</code>进行, 只要配置好<code>启动/入口JS</code>文件即可：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23823075/426703d8-0695-11e7-9f94-1dcca56d8caf.png" alt="image"></p>
-<p>Webstorm有两个button, 分别为启动和调试</p>
-<ul>
-<li>启动：用配置的 node <code>启动/入口JS</code></li>
-<li>调试：额外加上调试参数 node <code>启动/入口JS</code> <code>--debug-brk=55077</code> <code>--expose_debug_as=v8debug</code></li>
+<p>按照时间顺序完整的5个过程：<br><img src="https://user-images.githubusercontent.com/1297278/34852062-ccfad8bc-f767-11e7-95c2-fbea52042089.png" alt="image"></p>
+<p>按照使用频率进行的优先级排序（蓝色深度优先级高）：<br><img src="https://user-images.githubusercontent.com/1297278/34852146-28dca660-f768-11e7-9cb7-8df033d8d1c4.png" alt="image"></p>
+<p>其中 ，</p>
+<ol>
+<li>开发IDE环节是源头，也最方便配置、最容易实施，所以应该最优先被引入</li>
+<li>本地钩子，因为<code>git-commit</code>工具的普及，部署成本低，标准化高，所以优先级排在第二</li>
+<li>CI/CD过程检查，一般用在大团队，有CI/CD流程，因服务端部署具有强制性，可以cover本地钩子未部署的漏网之鱼</li>
+<li>编译时检查，目前前端都采用ES6/TS编程，每次保存，都要进行webpack+babel语法转换，可以在这个过程中引入语法检查，一旦有错误发生 ，编译失败。因为过于严格，失败后，程序就跑不起来了，实用性反而不高，所以排在第四</li>
+<li>服务端钩子，置灰并且排在最后的原因很简单，基本没人去用。主要是，服务端钩子要执行，还需要依赖执行环境及代码风格检查代码，这部分在CI/CD, 本地钩子中天然存在，服务端钩子就需要额外部署了；另外，服务端添加钩子稍显复杂。</li>
+</ol>
+<p>因为我们<code>目的2</code>的要求，在上述5个环节中，想达到代码风格规则的一致性，必须要求有统一的代码风格规则描述介质，在js的世界里，有<code>.editorconfig</code>，非常幸福，让我们可以跨介质共享配置规则。</p>
+<h2 id="从行为和体验看代码风格检查"><a href="#从行为和体验看代码风格检查" class="headerlink" title="从行为和体验看代码风格检查"></a>从行为和体验看代码风格检查</h2><ul>
+<li>IDE智能处理：保存后，自动帮助你格式化，体验非常好，无感知</li>
+<li>IDE警告错误提醒：没办法智能处理的警告以及错误，在文本中会以红色波浪线标识，hover后给出具体错误原因和改正指引，不强制你修改，但视觉上会让你不舒服</li>
+<li>代码编译：检查不通过，编译失败。如果没有IDE智能处理，拿一份不规范的代码想运行起来，你就必须一行一行去订正错误，否则demo永远跑不起来，人会抓狂，体验最差！</li>
+<li>git本地钩子：只有最终提交的时候，才会拦你。体验还好，而且可以通过<code>--no-verify</code>强制跳过检查，所以干扰性可以接受。</li>
+<li>git服务端钩子：好不容易写完代码，就因为本地开发没有遵从风格规范，没办法提交，那个痛苦啊</li>
+<li>CI/CD环节：因为同服务端钩子一样属于强制性检查，所以必定不舒服，但如果CI/CD仅设置为警告提醒，那么不会阻碍你发布上线的，另外，特殊情况，<code>travis</code>,<code>jenkins</code>往往会有管理员功能可以帮你走后门，跳过这个环节。</li>
 </ul>
-<p>由于IDE的高度集成，使得调试体验非常好：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23823065/26d92128-0695-11e7-9a00-02df3967c9fd.png" alt="image"></p>
-<h3 id="VisualStudioCode"><a href="#VisualStudioCode" class="headerlink" title="VisualStudioCode"></a>VisualStudioCode</h3><p><img src="https://user-images.githubusercontent.com/1297278/33805811-9b0c19f6-ddf9-11e7-83e1-7d87232eac11.png" alt="image"></p>
-<p><img src="https://user-images.githubusercontent.com/1297278/33805819-a90dd724-ddf9-11e7-94f3-bea572f2997b.png" alt="image"></p>
-<p>由于VS运行node环境为v8.9, 所以直接启用方式二进行debug: <code>node --inspect-brk=25696 test.js</code></p>
-<h2 id="关于运行时调试"><a href="#关于运行时调试" class="headerlink" title="关于运行时调试"></a>关于运行时调试</h2><p>已经启动的服务器不想停掉，有办法进行调试吗？</p>
-<ul>
-<li><code>--debug</code>方式有, 对具体node进程传入<code>USR1</code>信号即可： <code>kill -s USR1 &lt;pid&gt;</code></li>
-<li><code>--inspect</code>方式缺乏，有望在node v8.0提供，参见：<a href="https://github.com/nodejs/node/issues/8464" target="_blank" rel="noopener">Debug already running process using v8-inspector?</a></li>
-</ul>
-<p><img src="https://cloud.githubusercontent.com/assets/1297278/23822717/80ff748e-068d-11e7-868c-473c481a2a6f.png" alt="image"></p>
-<h2 id="关于多进程"><a href="#关于多进程" class="headerlink" title="关于多进程"></a>关于多进程</h2><p><code>--inspect</code>方式不会有问题（缺点不提了），因为会对每个进程单独开启一个debug链接，但传统<code>--debug</code>就麻烦了。</p>
-<hr>
-<p>只有一条：请尽可能降维为单进程后再调试。当然，多进程Debug是有方法的，只不过比较麻烦，可以参见：</p>
-<blockquote>
-<p><a href="https://strongloop.com/strongblog/whats-new-nodejs-v0-12-debugging-clusters/" target="_blank" rel="noopener">https://strongloop.com/strongblog/whats-new-nodejs-v0-12-debugging-clusters/</a></p>
-</blockquote>
-<p>另外，针对eggjs，如何进行调试呢？因为即使开发模式，egg也会启动主进程、worker进程及agent 3个进程。比较简单，找出woker进程的pid，运行时设置为<code>--debug</code>模式。其他多进程也可以按照这种方式手动设置后debug。</p>
-<blockquote>
-<p>ps -ef | grep app_worker.js // 找到pid<br>kill -s USR1 [pid]</p>
-</blockquote>
-<p>然后便可以开启<code>node-inspector</code>，在浏览器中Debug了。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>界面化调试偶尔用用即可，不要过于依赖，养成打印日志，通过日志定位、排查问题才是王道。</p>
+<p><img src="https://user-images.githubusercontent.com/1297278/34853614-a938e722-f76f-11e7-946b-20cf8a09cd09.png" alt="image"></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><img src="https://user-images.githubusercontent.com/1297278/34854034-2474726a-f772-11e7-91e4-551b61f484dc.png" alt="image"></p>
+<p>了解了5个部署环节和行为体验，基本上代码风格各手段的利弊得失你就清楚了，根据自己的业务需求，配置出适合自己的一套方案即可。</p>
+<p>一般来说，IDE和本地钩子就钩了，稍微严谨一些的话，再加一个CI/CD。</p>
 
       
     </div>
@@ -496,7 +443,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+            <a href="/tags/codestyle/" rel="tag"># codestyle</a>
+          
+            <a href="/tags/eslint/" rel="tag"># eslint</a>
+          
+            <a href="/tags/hooks/" rel="tag"># hooks</a>
           
         </div>
       
@@ -509,15 +460,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/blog/2017/f2e-b2e-border/" rel="next" title="前后端分离的概念和展望">
+                <i class="fa fa-chevron-left"></i> 前后端分离的概念和展望
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2017/issues-originated-hexo-blog/" rel="prev" title="How to eliminate the gap between github issues blog and hexo blog">
-                How to eliminate the gap between github issues blog and hexo blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -707,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#官方的两种方式"><span class="nav-number">1.</span> <span class="nav-text">官方的两种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一：-debug"><span class="nav-number">1.1.</span> <span class="nav-text">方式一：--debug</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#官方方案"><span class="nav-number">1.1.1.</span> <span class="nav-text">官方方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#社区扩展"><span class="nav-number">1.1.2.</span> <span class="nav-text">社区扩展</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二：-inspect"><span class="nav-number">1.2.</span> <span class="nav-text">方式二：--inspect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDE中如何debug"><span class="nav-number">2.</span> <span class="nav-text">IDE中如何debug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebStorm"><span class="nav-number">2.1.</span> <span class="nav-text">WebStorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VisualStudioCode"><span class="nav-number">2.2.</span> <span class="nav-text">VisualStudioCode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于运行时调试"><span class="nav-number">3.</span> <span class="nav-text">关于运行时调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于多进程"><span class="nav-number">4.</span> <span class="nav-text">关于多进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于代码风格"><span class="nav-number">1.</span> <span class="nav-text">关于代码风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从研发生命周期看代码风格检查"><span class="nav-number">2.</span> <span class="nav-text">从研发生命周期看代码风格检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从行为和体验看代码风格检查"><span class="nav-number">3.</span> <span class="nav-text">从行为和体验看代码风格检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>

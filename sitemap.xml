@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://johnnychen.cc/blog/2018/code-style-checker/</loc>
+    
+    <lastmod>2018-01-11T16:25:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://johnnychen.cc/blog/2017/f2e-b2e-border/</loc>
     
     <lastmod>2017-12-10T06:44:43.000Z</lastmod>

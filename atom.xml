@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://johnnychen.cc/"/>
-  <updated>2017-12-10T06:44:43.000Z</updated>
+  <updated>2018-01-11T16:25:31.000Z</updated>
   <id>http://johnnychen.cc/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>代码风格检查的工程化套路</title>
+    <link href="http://johnnychen.cc//blog/2018/code-style-checker/"/>
+    <id>http://johnnychen.cc//blog/2018/code-style-checker/</id>
+    <published>2018-01-09T17:05:24.000Z</published>
+    <updated>2018-01-11T16:25:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>既然是代码风格检查套路，那就是不局限与语言；哪种语言，都类似，照葫芦画瓢即可。为了表述方便，并顾及一些具体细节，我们以<code>javascript</code>作为例子。</p><p>代码风格检查的工程化套路，我们希望达到的目的：</p><ul><li>在尽可能多的研发生命周期环节上去触及这一问题，多管齐下，最终解决代码风格的问题</li><li>保证上述多环节执行的<code>代码风格规则</code>的一致性</li></ul><h2 id="关于代码风格"><a href="#关于代码风格" class="headerlink" title="关于代码风格"></a>关于代码风格</h2><p>代码风格有时过于笼统，实际上可以进一步分为两个层面</p><ul><li>文本格式检查</li><li>代码语法检查<ul><li>语法偏好检查</li><li>语法警告检查</li><li>语法错误检查</li></ul></li></ul><p>因为代码隶属文本，所以文本格式本身应该隶属代码风格的一部分，且是基础，不需要言明的部分，关于文本格式检查的规范很标准，统一采用<code>.editorconfig</code>配置即可。</p><p>在代码语法层面上，是有<code>偏好</code>、<code>警告</code>和<code>错误</code>之分的，偏好指的是喜好，比如<code>=</code>前后是否有空格，不影响程序的运行；<code>警告</code>不是偏好，看到警告需要警醒，很可能程序存在问题，或者自己逻辑不清，比如变量定义却没有使用；<code>错误</code>就不用说了，代码执行到这一行必定报错，比如重复<code>let</code>变量。</p><p>代码语法层面，主要通过AWT抽象语法书分析后给出结果；在工具使用上，一般也不会区分<code>偏好</code>,<code>警告</code>,<code>错误</code>，但我们心里还是要了解区别的，主要通过<code>.eslintconfig</code>来统一声明语法规则 。</p><h2 id="从研发生命周期看代码风格检查"><a href="#从研发生命周期看代码风格检查" class="headerlink" title="从研发生命周期看代码风格检查"></a>从研发生命周期看代码风格检查</h2><p>从开发到发布，代码风格检查主要作用在如下五个环节</p><ol><li>开发IDE环节：在文字编码的过程中 ，通过IDE及其插件实现</li><li>开发编译环节：比如webpack编译时，进行语法检测报警或报错，报错时直接编译失败</li><li>git提交本地钩子：<code>pre-commit</code>等工具会在你本地.git仓库中安装钩子，提交代码时，自动触发脚本检查，报警或报错，报错时直接组织提交</li><li>git提交服务端钩子: 在服务端.git仓库中安装钩子，效果与本地钩子类似，不过因为部署在服务端，因此可以全局控制，更加严格</li><li>CI/CD环节：在<code>jenkins</code>, <code>travis</code>中触发代码风格检查，如果失败则警告或中断CI/CD</li></ol><p>按照时间顺序完整的5个过程：<br><img src="https://user-images.githubusercontent.com/1297278/34852062-ccfad8bc-f767-11e7-95c2-fbea52042089.png" alt="image"></p><p>按照使用频率进行的优先级排序（蓝色深度优先级高）：<br><img src="https://user-images.githubusercontent.com/1297278/34852146-28dca660-f768-11e7-9cb7-8df033d8d1c4.png" alt="image"></p><p>其中 ，</p><ol><li>开发IDE环节是源头，也最方便配置、最容易实施，所以应该最优先被引入</li><li>本地钩子，因为<code>git-commit</code>工具的普及，部署成本低，标准化高，所以优先级排在第二</li><li>CI/CD过程检查，一般用在大团队，有CI/CD流程，因服务端部署具有强制性，可以cover本地钩子未部署的漏网之鱼</li><li>编译时检查，目前前端都采用ES6/TS编程，每次保存，都要进行webpack+babel语法转换，可以在这个过程中引入语法检查，一旦有错误发生 ，编译失败。因为过于严格，失败后，程序就跑不起来了，实用性反而不高，所以排在第四</li><li>服务端钩子，置灰并且排在最后的原因很简单，基本没人去用。主要是，服务端钩子要执行，还需要依赖执行环境及代码风格检查代码，这部分在CI/CD, 本地钩子中天然存在，服务端钩子就需要额外部署了；另外，服务端添加钩子稍显复杂。</li></ol><p>因为我们<code>目的2</code>的要求，在上述5个环节中，想达到代码风格规则的一致性，必须要求有统一的代码风格规则描述介质，在js的世界里，有<code>.editorconfig</code>，非常幸福，让我们可以跨介质共享配置规则。</p><h2 id="从行为和体验看代码风格检查"><a href="#从行为和体验看代码风格检查" class="headerlink" title="从行为和体验看代码风格检查"></a>从行为和体验看代码风格检查</h2><ul><li>IDE智能处理：保存后，自动帮助你格式化，体验非常好，无感知</li><li>IDE警告错误提醒：没办法智能处理的警告以及错误，在文本中会以红色波浪线标识，hover后给出具体错误原因和改正指引，不强制你修改，但视觉上会让你不舒服</li><li>代码编译：检查不通过，编译失败。如果没有IDE智能处理，拿一份不规范的代码想运行起来，你就必须一行一行去订正错误，否则demo永远跑不起来，人会抓狂，体验最差！</li><li>git本地钩子：只有最终提交的时候，才会拦你。体验还好，而且可以通过<code>--no-verify</code>强制跳过检查，所以干扰性可以接受。</li><li>git服务端钩子：好不容易写完代码，就因为本地开发没有遵从风格规范，没办法提交，那个痛苦啊</li><li>CI/CD环节：因为同服务端钩子一样属于强制性检查，所以必定不舒服，但如果CI/CD仅设置为警告提醒，那么不会阻碍你发布上线的，另外，特殊情况，<code>travis</code>,<code>jenkins</code>往往会有管理员功能可以帮你走后门，跳过这个环节。</li></ul><p><img src="https://user-images.githubusercontent.com/1297278/34853614-a938e722-f76f-11e7-946b-20cf8a09cd09.png" alt="image"></p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><img src="https://user-images.githubusercontent.com/1297278/34854034-2474726a-f772-11e7-91e4-551b61f484dc.png" alt="image"></p><p>了解了5个部署环节和行为体验，基本上代码风格各手段的利弊得失你就清楚了，根据自己的业务需求，配置出适合自己的一套方案即可。</p><p>一般来说，IDE和本地钩子就钩了，稍微严谨一些的话，再加一个CI/CD。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;既然是代码风格检查套路，那就是不局限与语言；哪种语言，都类似，照葫芦画瓢即可。为了表述方便，并顾及一些具体细节，我们以&lt;code&gt;javascript&lt;/code&gt;作为例子。&lt;/p&gt;
+&lt;p&gt;代码风格检查的工程化套路，我们希望达到的目的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在尽可能多
+      
+    
+    </summary>
+    
+    
+      <category term="codestyle" scheme="http://johnnychen.cc/tags/codestyle/"/>
+    
+      <category term="eslint" scheme="http://johnnychen.cc/tags/eslint/"/>
+    
+      <category term="hooks" scheme="http://johnnychen.cc/tags/hooks/"/>
+    
+  </entry>
   
   <entry>
     <title>前后端分离的概念和展望</title>

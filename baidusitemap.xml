@@ -4,6 +4,27 @@
 
     
   <url>
+    <loc>http://johnnychen.cc//blog/2018/code-style-checker/</loc>
+    <lastmod>2018-01-11T16:25:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码风格检查的工程化套路</title>
+        <pubTime>2018-01-09T17:05:24.000Z</pubTime>
+        
+        <tag>codestyle</tag>
+         
+        <tag>eslint</tag>
+         
+        <tag>hooks</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://johnnychen.cc//blog/2017/f2e-b2e-border/</loc>
     <lastmod>2017-12-10T06:44:43.000Z</lastmod>
     <data>
